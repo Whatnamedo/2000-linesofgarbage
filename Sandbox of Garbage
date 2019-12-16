@@ -1,0 +1,30 @@
+public static ArrayList radixSort (ArrayList<String> n, int index, int digits)
+    {
+        //final resulting ArrayList of sorted numbers
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        //When to stop
+        if (_______________________) 
+        {
+            for (int i = 0; i < n.size(); i++)
+            {
+                result.add(Integer.parseInt(n.get(i)));
+            }
+            return result;
+        }
+        //Normal ArrayList of numbers sorted at index position
+        ArrayList<String> temp = new ArrayList<String>();
+        //Counter variable in for loop
+        for (int x = ____________________________________) 
+        {
+            for (int i = 0; i < n.size(); i++)
+            {
+                //Converting and checking the indexed digit equal to x
+                if (Integer.parseInt(Character.toString((n.get(i)).charAt(digits-index))) == x)
+                {
+                    ____________________;
+                }
+            }
+        }
+        //Recursive return statement
+        return _____________________________________;
+    }
