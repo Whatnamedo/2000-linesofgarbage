@@ -1,108 +1,51 @@
 import java.util.*;
 
 public class Hand {
-	ArrayList<Card> cards = new ArrayList<Card>();  // stores all the cards of the hand
-	private int totalValue = 0;  // total value of the hand
-	boolean isDealer; // if the hand belongs to a dealer or a player
-	private String handValue = ""; // string to store the cards, used in the toString method
-	private String dealValue = "";
-	private boolean show = false;
-	private int numAces = 0;
-	
-	public void addCard(Card in) // adds card to the hand
+	private ArrayList<Card> hand = new ArrayList<Card>();
+	private int handLength = 0;
+	private int pokerHand = 0;
+	private boolean computer;
+	public Hand (boolean i)
 	{
-		if (isDealer && cards.size() == 0) // if the hand belongs to the dealer then the first card will remain hidden
+		computer = i;
+	}
+	public void addCard(Card i)
+	{
+		hand.add(i);
+		handLength++;
+		if (handLength == 2)
 		{
-			handValue += "Card: ???\n\t";
-			dealValue += in + "\n\t";
+			if ((hand.get(0)).getRank() == (hand.get(1).getRank()))
+			{
+				pokerHand = 9;
+			}
+			else
+			{
+				pokerHand = 10;
+			}
 		}
-		else // if the hand belongs to the player or the dealer already has a card, the card will be added to a string variable
+	}
+	public int getpokerHand()
+	{
+		return pokerHand;
+	}
+	public ArrayList<Card> getHand()
+	{
+		return hand;
+	}
+	public String toString()
+	{
+		String s = "";
+		if (computer == true)
 		{
-			handValue += in + "\n\t";
-			dealValue += in + "\n\t";
-		}
-		cards.add(in); // adds the card to the array
-		if (in.getRank() == 11 || in.getRank() == 12 || in.getRank() ==13)  // if the card is a jack, queen, king then the value of the card will be 10
-		{
-			totalValue += 10;
+			s += "Computer's Hand:\n\t";
 		}
 		else
 		{
-			totalValue += in.getRank(); // finds the numerical value of the card and adds it to the total value of the hand
-		}		
-		if (in.getRank() == 1) 
-		{
-			totalValue += 10;
-			numAces ++;
+			s += "Your Hand:\n\t";
 		}
+		s += hand.get(0) + "\n\t";
+		s += hand.get(1) + "\n\t";
+		return s;
 	}
-	
-	public int getNumAces()
-	{
-		return numAces;
-	}
-	
-	public void setNumAces(int n)
-	{
-		numAces = n;
-	}
-	
-	public void subtractAce()
-	{
-		numAces --;
-	}
-	
-	public int getSize()
-	{
-		return cards.size();
-	}
-	
-	public String getHandValue() // returns the value of handValue
-	{
-		return handValue;
-	}
-	
-	public int getTotalValue() // returns the value of totalValue
-	{
-		return totalValue;
-	}
-	
-	public void setTotalValue(int n)
-	{
-		totalValue = n;
-	}
-	
-	public void subtractTotalValue()
-	{
-		totalValue -= 10;
-		numAces --;
-	}
-	
-	public void show()
-	{
-		show = true;
-	}
-	
-	public boolean getShow()
-	{
-		return show;
-	}
-	
-	public Hand (boolean d) // constructor
-	{
-		isDealer = d;
-	}
-	
-	public String toString() // toStringn method
-	{
-		if (!isDealer) // if the hand belongs to the player then it will display all cards in the hand
-		{
-			return ("Player's Hand:\n" + "\t" + handValue + "Current Total: " + totalValue);
-		}
-		if (show)
-		{
-			return ("Dealer's Hand:\n" + "\t" + dealValue + "Current Total: " + totalValue);
-		}
-		return ("Dealer's Hand:\n" + "\t" + handValue); // if the hand belongs to the dealer then it will display all cards in the hand
-	}                                                   // except for the first card, which will be hidden
 }
