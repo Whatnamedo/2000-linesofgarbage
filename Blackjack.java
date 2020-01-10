@@ -3,7 +3,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Blackjack {
 	
-	public static int getBet(BufferedReader br, int bettingAmount, int bet, String str) throws InterruptedException 
+	static int bettingAmount = 10000; // amount of money the player has
+	static int bet; // how much the player is betting on the hand
+	static String str = ""; // used with BufferedReader to get player input
+	
+	public static void getBet(BufferedReader br) throws InterruptedException 
 	{ // method to determine how much the player wants to bet
 		System.out.println("Thank you for playing Black Jack!" + "\n" + "You have $" + bettingAmount + " to play!");
 		System.out.print("How much would you like to bet? ");
@@ -14,6 +18,7 @@ public class Blackjack {
 			{
 				str = br.readLine(); // reads the user's input
 				bet = Integer.parseInt(str); // converts the string bet into an integer bet
+				bettingAmount -= bet;
 			}
 			catch (NumberFormatException e)
 			{
@@ -27,10 +32,10 @@ public class Blackjack {
 			System.out.print("Invalid Input! How much would you like to bet? "); // keeps getting the bet until it is a valid bet
 		}
 		System.out.print("\n"); // prints a new line
-		return bettingAmount -= bet; // used to keep track of how much money the player has
+		return; // used to keep track of how much money the player has
 	}
 	
-	public static int hsloop(BufferedReader br, int total, int bet, Deck deck, Hand playerHand, Hand dealerHand, String str) throws InterruptedException
+	public static void hsloop(BufferedReader br, Deck deck, Hand playerHand, Hand dealerHand) throws InterruptedException
 	{
 		int turn = 0;
 		boolean dd = false;
@@ -47,11 +52,11 @@ public class Blackjack {
 				System.out.println("\nYour hand is busted!\nThe dealer has won this round!"); 
 				TimeUnit.SECONDS.sleep(1); // pause for 1 second
 				System.out.println("--------------------------");
-				return 0; // bet doesn't increase since it is being added by zero
+				return; // betting Amount doesn't increase
 			}
 			if (!dd)
 			{
-				if (turn == 1 || total < bet)
+				if (turn == 1 || bettingAmount < bet)
 				{
 					System.out.print("Would you like to hit or stand? ");
 				}
@@ -86,9 +91,22 @@ public class Blackjack {
 				}
 				if (turn == 1 &&(str.equals("double down") || str.equals("dd"))) // if the player decides to double down
 				{
+					bettingAmount -= bet;
 					bet = bet * 2;
 					dd = true;
 					playerHand.addCard(deck.draw()); // remove the top card from the deck and add it to the player's hand
+					while (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0) // if the player's hand is above 21 and he has an ace
+					{
+						System.out.println("\n" + playerHand); // display the player's hand
+						TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
+						playerHand.subtractTotalValue(); // remove 10 from the value of the hand
+						break;
+					}
+					System.out.println("\n" + playerHand); // display the player's hand
+					TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
+				}
+				if (turn == 1 && (str.equals("double down") || str.equals("dd")))
+				{
 					while (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0) // if the player's hand is above 21 and he has an ace
 					{
 						System.out.println("\n" + playerHand); // display the player's hand
@@ -102,12 +120,9 @@ public class Blackjack {
 						System.out.println("\nYour hand is busted!\nThe dealer has won this round!"); 
 						TimeUnit.SECONDS.sleep(1); // pause for 1 second
 						System.out.println("--------------------------");
-						return (-1 * (bet/2)); // bet doesn't increase since it is being added by zero
+						return; //player loses whatever he bet
 					}
-					System.out.println("\n" + playerHand); // display the player's hand
-					TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
 				}
-				
 				if (str.equals("stand") || turn == 1 && (str.equals("double down") || str.equals("dd"))) // if the player decides to stand
 				{
 					System.out.println("\nDealers turn:");
@@ -132,7 +147,8 @@ public class Blackjack {
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
 							System.out.println("Its a draw! Bets will be refunded.\n--------------------------");
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
-							return bet; // returns the players bet, meaning he gets his money back
+							bettingAmount += (2*bet);
+							return; // betting Amount increases by bet
 						}
 						
 						if (dealerHand.getTotalValue() > playerHand.getTotalValue() && dealerHand.getTotalValue() > 16) // if the dealer's hand is greater than the player's hand
@@ -142,11 +158,7 @@ public class Blackjack {
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
 							System.out.println("The dealer has won the round!\n--------------------------");
 							TimeUnit.SECONDS.sleep(1); // pause for 1 seconds
-							if (dd) // if the player decided to double down
-							{
-								return (-1 * (bet/2)); // player loses double the initial bet
-							}
-							return 0; //player loses whatever he bet
+							return; //player loses whatever he bet
 						}
 						
 						else if (dealerHand.getTotalValue() > 16) // if the dealer's hand is greater than the player's hand
@@ -156,11 +168,8 @@ public class Blackjack {
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
 							System.out.println("The dealer's hand has less points than yours!\nCongratulations, you win!\n--------------------------");
 							TimeUnit.SECONDS.sleep(1); // pause for 1 seconds
-							if (dd) // if the player decided to double down
-							{
-								return ((bet/2)*3);
-							}
-							return (bet * 2); // player earns double what they bet ($10,000 with a $500 bet will now be $10,500)
+							bettingAmount += 2*bet;
+							return ; // player earns double what they bet ($10,000 with a $500 bet will now be $10,500)
 						}
 						
 						if (dealerHand.getTotalValue() < 17) // if the dealers total is less than 17
@@ -184,11 +193,8 @@ public class Blackjack {
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
 							System.out.println("\nThe dealer's hand is busted!\nCongratulations, you win!\n--------------------------");
 							TimeUnit.SECONDS.sleep(1); // pause for 1 seconds
-							if (dd) // if the player decided to double down
-							{
-								return ((bet/2)*3);
-							}
-							return (bet * 2); // player earns double what they bet ($10,000 with a $500 bet will now be $10,500)
+							bettingAmount += 2*bet;
+							return; //player gains double their bet
 						}
 						
 						if (dealerHand.getTotalValue() > playerHand.getTotalValue() && dealerHand.getTotalValue() > 16) // if the dealer's hand is greater than the player's hand
@@ -198,11 +204,7 @@ public class Blackjack {
 							TimeUnit.SECONDS.sleep(1); // pause for 1 second
 							System.out.println("The dealer has won the round!\n--------------------------");
 							TimeUnit.SECONDS.sleep(1); // pause for 1 seconds
-							if (dd) // if the player decided to double down
-							{
-								return (-1 * (bet/2)); // player loses double the initial bet
-							}
-							return 0; //player loses whatever he bet
+							return; //player loses whatever he bet
 						}
 					}
 				}
@@ -217,24 +219,15 @@ public class Blackjack {
 	public static void main(String[] args) throws InterruptedException // main code
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // used to read input
-		int bettingAmount = 10000; // amount of money the player has
-		int bet; // how much the player is betting on the hand
-		int temp = bettingAmount; // used to keep track of the bettingAmount each turn
-		String str = ""; // used with BufferedReader to get player input
 			
-		while (true) // while the player has money
+		while (bettingAmount > 0) // while the player has money
 		{
-			if (bettingAmount < 1)
-			{
-				break;
-			}
 			bet = -1; 
 			Deck deck = new Deck(); // creates a deck
 			Hand playerHand = new Hand(false); // creates a hand for the player
 			Hand dealerHand = new Hand(true); // creates a hand for the dealer
+			getBet(br);
 			
-			bettingAmount = getBet(br,bettingAmount,bet,str); // finds out how much money the player wants to bet
-			bet = (temp - bettingAmount); // sets bet to the amount the player is betting
 			deck.shuffle(); // shuffles the deck
 			playerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the player's hand
 			playerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the player's hand
@@ -245,8 +238,7 @@ public class Blackjack {
 			dealerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the dealer's hand
 			
 			System.out.println(dealerHand); // displays the player's hand
-			bettingAmount += hsloop(br,bettingAmount, bet, deck, playerHand, dealerHand, str); // player's turn (hit, stand) --> dealer's turn
-			temp = bettingAmount;
+			hsloop(br, deck, playerHand, dealerHand); // player's turn (hit, stand) --> dealer's turn
 
 		}
 		System.out.println("You have ran out of money, you lose!"); // if bettingAmount is <= 0 then the player loses and its game over
