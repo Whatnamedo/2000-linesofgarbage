@@ -96,18 +96,6 @@ public class Blackjack {
 						playerHand.subtractTotalValue(); // remove 10 from the value of the hand
 						break;
 					}
-					System.out.println("\n" + playerHand); // display the player's hand
-					TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
-				}
-				if (turn == 1 && (str.equals("double down") || str.equals("dd")))
-				{
-					while (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0) // if the player's hand is above 21 and he has an ace
-					{
-						System.out.println("\n" + playerHand); // display the player's hand
-						TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
-						playerHand.subtractTotalValue(); // remove 10 from the value of the hand
-						break;
-					}
 					if (playerHand.getTotalValue() > 21) // if the player's hand is above 21 with no aces
 					{
 						TimeUnit.SECONDS.sleep(1); // pause for 1 second
@@ -116,7 +104,10 @@ public class Blackjack {
 						System.out.println("--------------------------");
 						return (-1 * (bet/2)); // bet doesn't increase since it is being added by zero
 					}
+					System.out.println("\n" + playerHand); // display the player's hand
+					TimeUnit.SECONDS.sleep(2); // pause for 2 seconds
 				}
+				
 				if (str.equals("stand") || turn == 1 && (str.equals("double down") || str.equals("dd"))) // if the player decides to stand
 				{
 					System.out.println("\nDealers turn:");
@@ -231,8 +222,12 @@ public class Blackjack {
 		int temp = bettingAmount; // used to keep track of the bettingAmount each turn
 		String str = ""; // used with BufferedReader to get player input
 			
-		while (bettingAmount > 0) // while the player has money
+		while (true) // while the player has money
 		{
+			if (bettingAmount < 1)
+			{
+				break;
+			}
 			bet = -1; 
 			Deck deck = new Deck(); // creates a deck
 			Hand playerHand = new Hand(false); // creates a hand for the player
