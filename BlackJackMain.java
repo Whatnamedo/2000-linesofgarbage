@@ -1,6 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.MediaTracker;
@@ -42,8 +44,14 @@ public class BlackJackMain implements MouseListener{
 		play.addMouseListener(this);
 		info.addMouseListener(this);
 		quit.addMouseListener(this);
-		start.setPreferredSize(new Dimension(1000,600));
-		start.setLayout(null);
+		start.setPreferredSize(new Dimension(300,300));
+		start.setLayout (new GridLayout(3,0));
+//		play.setHorizontalAlignment(JLabel.CENTER);
+//		play.setVerticalAlignment(JLabel.NORTH);
+//		info.setHorizontalAlignment(JLabel.CENTER);
+//		info.setVerticalAlignment(JLabel.CENTER);
+//		quit.setHorizontalAlignment(JLabel.CENTER);
+//		quit.setVerticalAlignment(JLabel.SOUTH);
 		game.setPreferredSize(new Dimension(1000,600));
 		game.setLayout(null);
 		background[0] = new ImageIcon("blueback1.jpg");
@@ -104,12 +112,12 @@ public class BlackJackMain implements MouseListener{
 		backMain = new JLabel(background[0]);
 		backMain.setOpaque(true);
 		backMain.setBounds(0, 0, 1000, 600);
-		play.setBounds(450, 100, 150, 50);
-		play.setVisible(true);
-		info.setBounds(450, 250, 150, 50);
-		info.setVisible(true);
-		quit.setBounds(450, 400, 150, 50);
-		quit.setVisible(true);
+		//play.setBounds(450, 100, 150, 50);
+		//play.setVisible(true);
+		//info.setBounds(450, 250, 150, 50);
+		//info.setVisible(true);
+		//quit.setBounds(450, 400, 150, 50);
+		//quit.setVisible(true);
 		backLabel = new JLabel(background[0]);
 		backLabel.setOpaque(true);
 		backLabel.setBounds(0, 0, 1000, 600);
@@ -140,10 +148,13 @@ public class BlackJackMain implements MouseListener{
 		hit.setBounds(210, 350, 150, 50);
 		Double.setBounds(460, 350, 150, 50);
 		stand.setBounds(710, 350, 150, 50);
-		start.add(backMain);
+//		start.add(backMain);
 		start.add(play);
 		start.add(info);
 		start.add(quit);
+//		start.add(play, BorderLayout.NORTH);
+//		start.add(play, BorderLayout.CENTER);
+//		start.add(play, BorderLayout.SOUTH);
 		game.add(table1);
 		game.add(table2);
 		game.add(table3);
@@ -159,8 +170,9 @@ public class BlackJackMain implements MouseListener{
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
-		startframe.setLocation(50,50);
+		startframe.setLocation(800,300);
 	}
+	
 	public void mouseClicked (MouseEvent e)
     {
 		if (e.getSource() == hit)
@@ -182,8 +194,11 @@ public class BlackJackMain implements MouseListener{
 		}
 		else if (e.getSource() == play)
 		{
-			game.setVisible(true);
-			start.setVisible(false);
+			startframe.setVisible(false);
+			frame.add(game);
+			frame.pack();
+			frame.setVisible(true);
+			frame.setLocation(50, 50);
 		}
 		else if (e.getSource() == info)
 		{
@@ -192,10 +207,6 @@ public class BlackJackMain implements MouseListener{
 		else if (e.getSource() == quit)
 		{
 			startframe.setVisible(false);
-			frame.add(game);
-			frame.pack();
-			frame.setVisible(true);
-			frame.setLocation(50, 50);
 		}
     }
     
