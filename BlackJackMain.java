@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -21,6 +22,7 @@ public class BlackJackMain implements MouseListener{
 	private JButton betton = new JButton("Bet");
 	private JFrame startframe = new JFrame("BlackJack");
 	private JFrame frame = new JFrame("BlackJack");
+	private JFrame betframe = new JFrame("BlackJack");
 	private JPanel game = new JPanel();
 	private JPanel start = new JPanel();
 	private JPanel bet = new JPanel();
@@ -43,6 +45,8 @@ public class BlackJackMain implements MouseListener{
 	private JLabel turn;
 	private JLabel balance = new JLabel("Balance: $" + Blackjack.bettingAmount);
 	private JLabel bamount = new JLabel("Bet: $" + Blackjack.bet);
+	private JLabel balances = new JLabel("Balance: $" + Blackjack.bettingAmount);
+	private JLabel bethere = new JLabel("How much would you like to bet?");
 	private JTextField in = new JTextField();
 	public BlackJackMain()
 	{
@@ -52,6 +56,7 @@ public class BlackJackMain implements MouseListener{
 		play.addMouseListener(this);
 		info.addMouseListener(this);
 		quit.addMouseListener(this);
+		betton.addMouseListener(this);
 		start.setPreferredSize(new Dimension(300,300));
 		start.setLayout (new GridLayout(3,0));
 		game.setPreferredSize(new Dimension(1000,600));
@@ -160,6 +165,11 @@ public class BlackJackMain implements MouseListener{
 		balance.setBounds(10, 10, 250, 10);
 		bamount.setForeground(Color.cyan);
 		bamount.setBounds(10, 30, 250, 10);
+		bethere.setForeground(Color.white);
+		bethere.setBounds(397, 210, 250, 50);
+		bethere.setFont(new Font("Monospace", Font.PLAIN, 15));
+		balances.setForeground(Color.white);
+		balances.setBounds(10,10,250,10);
 		hit.setBounds(210, 350, 150, 50);
 		Double.setBounds(460, 350, 150, 50);
 		stand.setBounds(710, 350, 150, 50);
@@ -168,6 +178,8 @@ public class BlackJackMain implements MouseListener{
 //		start.add(backMain);
 		bet.add(in);
 		bet.add(betton);
+		bet.add(bethere);
+		bet.add(balances);
 		bet.add(backBet);
 		start.add(play);
 		start.add(info);
@@ -215,11 +227,10 @@ public class BlackJackMain implements MouseListener{
 		else if (e.getSource() == play)
 		{
 			startframe.setVisible(false);
-			frame.add(game);
-			frame.add(bet);
-			frame.pack();
-			frame.setVisible(true);
-			frame.setLocation(50, 50);
+			betframe.add(bet);
+			betframe.pack();
+			betframe.setVisible(true);
+			betframe.setLocation(50,50);
 		}
 		else if (e.getSource() == info)
 		{
@@ -228,6 +239,41 @@ public class BlackJackMain implements MouseListener{
 		else if (e.getSource() == quit)
 		{
 			startframe.setVisible(false);
+		}
+		else if (e.getSource() == betton)
+		{
+			String out;
+			out = in.getText();
+			try
+			{
+				int x = Integer.parseInt(out);
+				if (x > Blackjack.bettingAmount || x < 1)
+				{
+					bethere.setText("Invalid Input! How much would you like to bet?");
+					bethere.setBounds(350, 210, 350, 50);
+				}
+				else
+				{
+					bethere.setText("How much would you like to bet");
+					bethere.setBounds(397, 210, 250, 50);
+					betframe.setVisible(false);
+					int b = Integer.parseInt(out);
+					Blackjack.bettingAmount -= b;
+					Blackjack.bet = b;
+					balance.setText("Balance: $" + Blackjack.bettingAmount);
+					bamount.setText("Bet: $" + Blackjack.bet);
+					balances.setText("Balance: $" + Blackjack.bettingAmount);
+					frame.add(game);
+					frame.pack();
+					frame.setVisible(true);
+					frame.setLocation(50, 50);
+				}
+			}
+			catch (NumberFormatException i)
+			{
+				bethere.setText("Invalid Input! How much would you like to bet?");
+				bethere.setBounds(350, 210, 350, 50);
+			}
 		}
     }
     
