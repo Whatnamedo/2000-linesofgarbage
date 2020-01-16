@@ -25,10 +25,12 @@ public class Hand {
 		cards.add(in); // adds the card to the array
 		if (in.getRank() == 11 || in.getRank() == 12 || in.getRank() ==13)  // if the card is a jack, queen, king then the value of the card will be 10
 		{
+			totalValue += 10;
 			temp += 10;
 		}
 		else
 		{
+			totalValue += in.getRank();
 			temp += in.getRank(); // finds the numerical value of the card and adds it to the total value of the hand
 		}		
 		if (in.getRank() == 1) 
@@ -76,8 +78,11 @@ public class Hand {
 	
 	public void subtractTotalValue()
 	{
-		 totalValue -= 10;
-	     temp -= 10;
+	     totalValue -= 10;
+	     if (cards.size() == 1)
+	     {
+		temp -= 10;
+	     }
 	     numAces --;
 	}
 	
