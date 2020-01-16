@@ -47,7 +47,11 @@ public class BlackJackMain implements MouseListener{
 	private JLabel bamount = new JLabel("Bet: $" + Blackjack.bet);
 	private JLabel balances = new JLabel("Balance: $" + Blackjack.bettingAmount);
 	private JLabel bethere = new JLabel("How much would you like to bet?");
+	private JLabel value = new JLabel("Total Hand Value: ");
 	private JTextField in = new JTextField();
+	private Deck d = new Deck();
+	private Hand playerHand = new Hand(false);
+	private Hand dealerHand = new Hand(true);
 	public BlackJackMain()
 	{
 		hit.addMouseListener(this);
@@ -123,24 +127,12 @@ public class BlackJackMain implements MouseListener{
 		backMain = new JLabel(background[0]);
 		backMain.setOpaque(true);
 		backMain.setBounds(0, 0, 1000, 600);
-		//play.setBounds(450, 100, 150, 50);
-		//play.setVisible(true);
-		//info.setBounds(450, 250, 150, 50);
-		//info.setVisible(true);
-		//quit.setBounds(450, 400, 150, 50);
-		//quit.setVisible(true);
 		backLabel = new JLabel(background[0]);
 		backLabel.setOpaque(true);
 		backLabel.setBounds(0, 0, 1000, 600);
 		backBet = new JLabel(background[0]);
 		backBet.setOpaque(true);
 		backBet.setBounds(0, 0, 1000, 600);
-		table1 = new JLabel(cards[0]);
-		table1.setOpaque(true);
-		table1.setBounds(340,450,69,94);
-		table2 = new JLabel(cards[1]);
-		table2.setOpaque(true);
-		table2.setBounds(420,450,69,94);
 		table3 = new JLabel(cards[2]);
 		table3.setOpaque(true);
 		table3.setBounds(500,450,69,94);
@@ -156,9 +148,6 @@ public class BlackJackMain implements MouseListener{
 		deal1 = new JLabel(back[0]);
 		deal1.setOpaque(true);
 		deal1.setBounds(460,31,69,94);
-		deal2 = new JLabel(cards[8]);
-		deal2.setOpaque(true);
-		deal2.setBounds(540,31,69,94);
 		turn = new JLabel(arrow[1]);
 		turn.setBounds(65, 250, 50, 100);
 		balance.setForeground(Color.white);
@@ -175,7 +164,6 @@ public class BlackJackMain implements MouseListener{
 		stand.setBounds(710, 350, 150, 50);
 		in.setBounds(400, 250, 200, 50);
 		betton.setBounds(450, 325, 100, 25);
-//		start.add(backMain);
 		bet.add(in);
 		bet.add(betton);
 		bet.add(bethere);
@@ -187,18 +175,11 @@ public class BlackJackMain implements MouseListener{
 		game.add(turn);
 		game.add(balance);
 		game.add(bamount);
-		game.add(table1);
-		game.add(table2);
-		game.add(table3);
-		game.add(table4);
-		game.add(table5);
 		game.add(decks);
 		game.add(deal1);
-		game.add(deal2);
 		game.add(hit);
 		game.add(Double);
 		game.add(stand);
-		game.add(backLabel);
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
@@ -209,12 +190,7 @@ public class BlackJackMain implements MouseListener{
     {
 		if (e.getSource() == hit)
 		{
-			imageNo++;
-			if (imageNo > 51)
-			{
-				imageNo = 0;
-			}
-			table3.setIcon(cards[imageNo]);
+			Card ind = d.draw();
 		}
 		else if (e.getSource() == Double)
 		{
@@ -254,6 +230,27 @@ public class BlackJackMain implements MouseListener{
 				}
 				else
 				{
+					d = new Deck();
+					playerHand = new Hand(false);
+					dealerHand = new Hand(true);
+					d.shuffle();
+					Card ind = d.draw();
+					playerHand.addCard(ind);
+					table1 = new JLabel(cards[(ind.getRank()-1)+(ind.getSuit()-1)]);
+					table1.setOpaque(true);
+					table1.setBounds(340,450,69,94);
+					ind = d.draw();
+					playerHand.addCard(ind);
+					table2 = new JLabel(cards[(ind.getRank()-1)+(ind.getSuit()-1)]);
+					table2.setOpaque(true);
+					table2.setBounds(420,450,69,94);
+					ind = d.draw();
+					dealerHand.addCard(ind);
+					ind = d.draw();
+					dealerHand.addCard(ind);
+					deal2 = new JLabel(cards[(ind.getRank()-1)+(ind.getSuit()-1)]);
+					deal2.setOpaque(true);
+					deal2.setBounds(540,31,69,94);
 					bethere.setText("How much would you like to bet");
 					bethere.setBounds(397, 210, 250, 50);
 					betframe.setVisible(false);
@@ -263,6 +260,15 @@ public class BlackJackMain implements MouseListener{
 					balance.setText("Balance: $" + Blackjack.bettingAmount);
 					bamount.setText("Bet: $" + Blackjack.bet);
 					balances.setText("Balance: $" + Blackjack.bettingAmount);
+					value.setText("Hand Value: " + Integer.toString(playerHand.getTotalValue()));
+					value.setBounds(492, 400, 200, 50);
+					value.setForeground(Color.white);
+					value.setFont(new Font("Monospace", Font.PLAIN, 15));
+					game.add(table1);
+					game.add(table2);
+					game.add(deal2);
+					game.add(value);
+					game.add(backLabel);
 					frame.add(game);
 					frame.pack();
 					frame.setVisible(true);
