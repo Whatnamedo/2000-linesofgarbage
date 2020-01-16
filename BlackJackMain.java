@@ -20,11 +20,9 @@ public class BlackJackMain implements MouseListener{
 	private JButton Double = new JButton("DOUBLE");
 	private JButton stand = new JButton("STAND");
 	private JButton betton = new JButton("Bet");
-	private JButton backstart = new JButton("Back to Main Page");
 	private JFrame startframe = new JFrame("BlackJack");
 	private JFrame frame = new JFrame("BlackJack");
 	private JFrame betframe = new JFrame("BlackJack");
-	private JFrame infoframe = new JFrame("BlackJack");
 	private JPanel game = new JPanel();
 	private JPanel start = new JPanel();
 	private JPanel bet = new JPanel();
@@ -63,7 +61,6 @@ public class BlackJackMain implements MouseListener{
 		info.addMouseListener(this);
 		quit.addMouseListener(this);
 		betton.addMouseListener(this);
-		backstart.addMouseListener(this);
 		start.setPreferredSize(new Dimension(300,300));
 		start.setLayout (new GridLayout(3,0));
 		game.setPreferredSize(new Dimension(1000,600));
@@ -215,7 +212,6 @@ public class BlackJackMain implements MouseListener{
 		{
 			startframe.setVisible(false);
 			JLabel HowToPlay, Objective, CardValues, Betting, PlayerTurn, DealerTurn, DoublingDown;
-			backstart.setBounds(5,5,200,50);
 			HowToPlay = new JLabel ();
 			HowToPlay.setText("<html><b>How To Play</b><br></html>");
 			HowToPlay.setFont(new Font("Monospace", Font.PLAIN, 25));
@@ -251,7 +247,6 @@ public class BlackJackMain implements MouseListener{
 			DoublingDown.setFont(new Font("Monospace", Font.PLAIN, 15));
 			DoublingDown.setBounds(15, 500, 1000, 60);
 			DoublingDown.setForeground(Color.white);
-			backMain.add(backstart);
 			backMain.add(HowToPlay);
 			backMain.add(Objective);
 			backMain.add(CardValues);
@@ -259,10 +254,10 @@ public class BlackJackMain implements MouseListener{
 			backMain.add(PlayerTurn);
 			backMain.add(DealerTurn);
 			backMain.add(DoublingDown);
-			infoframe.add(backMain);
-			infoframe.pack();
-			infoframe.setLocation(50, 50);
-			infoframe.setVisible(true);
+			frame.add(backMain);
+			frame.pack();
+			frame.setLocation(50, 50);
+			frame.setVisible(true);
 		}
 		else if (e.getSource() == quit)
 		{
@@ -332,11 +327,6 @@ public class BlackJackMain implements MouseListener{
 				bethere.setText("Invalid Input! How much would you like to bet?");
 				bethere.setBounds(350, 210, 350, 50);
 			}
-		}
-		else if (e.getSource() == backstart)
-		{
-			infoframe.setVisible(false);
-			startframe.setVisible(true);
 		}
     }
     
