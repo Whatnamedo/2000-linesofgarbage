@@ -6,6 +6,7 @@ public class Hand {
 	boolean isDealer; // if the hand belongs to a dealer or a player
 	private String handValue = ""; // string to store the cards, used in the toString method
 	private String dealValue = "";
+	private int temp = 0;
 	private boolean show = false;
 	private int numAces = 0;
 	
@@ -24,15 +25,16 @@ public class Hand {
 		cards.add(in); // adds the card to the array
 		if (in.getRank() == 11 || in.getRank() == 12 || in.getRank() ==13)  // if the card is a jack, queen, king then the value of the card will be 10
 		{
-			totalValue += 10;
+			temp += 10;
 		}
 		else
 		{
-			totalValue += in.getRank(); // finds the numerical value of the card and adds it to the total value of the hand
+			temp += in.getRank(); // finds the numerical value of the card and adds it to the total value of the hand
 		}		
 		if (in.getRank() == 1) 
 		{
 			totalValue += 10;
+			temp += 10;
 			numAces ++;
 		}
 	}
@@ -74,8 +76,9 @@ public class Hand {
 	
 	public void subtractTotalValue()
 	{
-		totalValue -= 10;
-		numAces --;
+		 totalValue -= 10;
+	     temp -= 10;
+	     numAces --;
 	}
 	
 	public void show()
@@ -97,12 +100,12 @@ public class Hand {
 	{
 		if (!isDealer) // if the hand belongs to the player then it will display all cards in the hand
 		{
-			return ("Player's Hand:\n" + "\t" + handValue + "Current Total: " + totalValue);
+			return ("Current Total: " + totalValue);
 		}
 		if (show)
 		{
-			return ("Dealer's Hand:\n" + "\t" + dealValue + "Current Total: " + totalValue);
+			return ("Current Total: " + totalValue);
 		}
-		return ("Dealer's Hand:\n" + "\t" + handValue); // if the hand belongs to the dealer then it will display all cards in the hand
-	}                                                   // except for the first card, which will be hidden
+		return ("Current Total: " + (totalValue-temp));
+	}    
 }
