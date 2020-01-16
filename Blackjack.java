@@ -12,13 +12,12 @@ public class Blackjack {
 		System.out.println("Thank you for playing Black Jack!" + "\n" + "You have $" + bettingAmount + " to play!");
 		System.out.print("How much would you like to bet? ");
 		
-		while (bet < 1 || bet > bettingAmount) // while loop which asks the player for a betting amount, invalid inputs result in the user
+		while (true) // while loop which asks the player for a betting amount, invalid inputs result in the user
 		{                                       // being prompted to enter a valid input
 			try
 			{
 				str = br.readLine(); // reads the user's input
 				bet = Integer.parseInt(str); // converts the string bet into an integer bet
-				bettingAmount -= bet;
 			}
 			catch (NumberFormatException e)
 			{
@@ -28,7 +27,11 @@ public class Blackjack {
 			{
 				
 			}
-			if (bet > 0 && bet < bettingAmount + 1) break; // will stop the loop when the bet is above zero and <= to the money the player has
+			if (bet > 0 && bet < bettingAmount + 1) 
+			{
+				bettingAmount -= bet;
+				break; // will stop the loop when the bet is above zero and <= to the money the player has
+			}
 			System.out.print("Invalid Input! How much would you like to bet? "); // keeps getting the bet until it is a valid bet
 		}
 		System.out.print("\n"); // prints a new line
