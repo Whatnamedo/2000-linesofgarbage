@@ -117,12 +117,12 @@ public class Hand
 	{
 		if (!isDealer) // if the hand belongs to the player then it will display all cards in the hand
 		{
-			return ("Current Total: " + totalValue);
+			return (Integer.toString(totalValue));
 		}
 		if (show)
 		{
-			return ("Current Total: " + totalValue);
+			return (Integer.toString(totalValue));
 		}
-		return ("Current Total: " + (totalValue - temp));
+		return (Integer.toString(totalValue - temp));
 	}
 }
