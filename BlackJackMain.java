@@ -281,7 +281,9 @@ public class BlackJackMain implements MouseListener{
 			Blackjack.bet *= 2;
 			Card ind = d.draw();
 			playerHand.addCard(ind);
+			hit.setVisible(false);
 			Double.setVisible(false);
+			stand.setVisible(false);
 			bamount.setText("Bet: $" + Blackjack.bet);
 			balance.setText("Balance: $" + Blackjack.bettingAmount);
 			
@@ -341,7 +343,9 @@ public class BlackJackMain implements MouseListener{
 		}
 		else if (e.getSource() == stand)
 		{
+			hit.setVisible(false);
 			Double.setVisible(false);
+			stand.setVisible(false);
 		}
 		else if (e.getSource() == play)
 		{
