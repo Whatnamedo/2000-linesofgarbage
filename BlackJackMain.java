@@ -1,5 +1,3 @@
-package BlackJack_Game;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,6 +39,10 @@ public class BlackJackMain implements MouseListener{
 	private JLabel table3;
 	private JLabel table4;
 	private JLabel table5;
+	private JLabel table6;
+	private JLabel table7;
+	private JLabel table8;
+	private JLabel table9;
 	private JLabel backLabel;
 	private JLabel backMain;
 	private JLabel backBet;
@@ -141,16 +143,32 @@ public class BlackJackMain implements MouseListener{
 		backBet.setBounds(0, 0, 1000, 600);
 		table3 = new JLabel(cards[2]);
 		table3.setOpaque(true);
-		table3.setBounds(500,450,69,94);
+		table3.setBounds(340,450,69,94);
 		table3.setVisible(false);
 		table4 = new JLabel(cards[3]);
 		table4.setOpaque(true);
-		table4.setBounds(580,450,69,94);
+		table4.setBounds(420,450,69,94);
 		table4.setVisible(false);
 		table5 = new JLabel(cards[4]);
 		table5.setOpaque(true);
-		table5.setBounds(660,450,69,94);
+		table5.setBounds(500,450,69,94);
 		table5.setVisible(false);
+		table6 = new JLabel(cards[5]);
+		table6.setOpaque(true);
+		table6.setBounds(580,450,69,94);
+		table6.setVisible(false);
+		table7 = new JLabel(cards[6]);
+		table7.setOpaque(true);
+		table7.setBounds(660,450,69,94);
+		table7.setVisible(false);
+		table8 = new JLabel(cards[7]);
+		table8.setOpaque(true);
+		table8.setBounds(740,450,69,94);
+		table8.setVisible(false);
+		table9 = new JLabel(cards[8]);
+		table9.setOpaque(true);
+		table9.setBounds(820,450,69,94);
+		table9.setVisible(false);
 		decks = new JLabel(deck[0]);
 		decks.setOpaque(true);
 		decks.setBounds(500, 200, 69, 94);
@@ -223,6 +241,30 @@ public class BlackJackMain implements MouseListener{
 				table5.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
 			}
+			else if (index == 6)
+			{
+				table6.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table6.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 7)
+			{
+				table7.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table7.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 8)
+			{
+				table8.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table8.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 9)
+			{
+				table9.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table9.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
 			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
 			{
 				playerHand.subtractTotalValue();
@@ -260,6 +302,30 @@ public class BlackJackMain implements MouseListener{
 			{
 				table5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table5.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 6)
+			{
+				table6.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table6.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 7)
+			{
+				table7.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table7.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 8)
+			{
+				table8.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table8.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 9)
+			{
+				table9.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table9.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
 			}
 			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
@@ -365,12 +431,12 @@ public class BlackJackMain implements MouseListener{
 					playerHand.addCard(ind);
 					table1 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table1.setOpaque(true);
-					table1.setBounds(340,450,69,94);
+					table1.setBounds(180,450,69,94);
 					ind = d.draw();
 					playerHand.addCard(ind);
 					table2 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table2.setOpaque(true);
-					table2.setBounds(420,450,69,94);
+					table2.setBounds(260,450,69,94);
 					ind = d.draw();
 					dealerHand.addCard(ind);
 					ind = d.draw();
@@ -414,6 +480,10 @@ public class BlackJackMain implements MouseListener{
 					game.add(table3);
 					game.add(table4);
 					game.add(table5);
+					game.add(table6);
+					game.add(table7);
+					game.add(table8);
+					game.add(table9);
 					game.add(deal2);
 					game.add(value);
 					game.add(dvalue);
