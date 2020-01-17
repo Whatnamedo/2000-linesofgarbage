@@ -1,3 +1,5 @@
+package BlackJack_Game;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -198,7 +200,6 @@ public class BlackJackMain implements MouseListener{
     {
 		if (e.getSource() == hit)
 		{
-			
 			Card ind = d.draw();
 			playerHand.addCard(ind);
 			Double.setVisible(false);
@@ -222,10 +223,47 @@ public class BlackJackMain implements MouseListener{
 				table5.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
 			}
+			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
+			{
+				playerHand.subtractTotalValue();
+				value.setText("Hand Value: " + playerHand);
+			}
 		}
 		else if (e.getSource() == Double)
 		{
+			Blackjack.bettingAmount -= Blackjack.bet;
+			Blackjack.bet *= 2;
+			Card ind = d.draw();
+			playerHand.addCard(ind);
 			Double.setVisible(false);
+			bamount.setText("Bet: $" + Blackjack.bet);
+			balance.setText("Balance: $" + Blackjack.bettingAmount);
+			
+			int index = playerHand.getSize();
+			if (index == 3)
+			{
+				table3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table3.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 4)
+			{
+				table4.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table4.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			else if (index == 5)
+			{
+				table5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table5.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
+			}
+			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
+			{
+				playerHand.subtractTotalValue();
+				value.setText("Hand Value: " + playerHand);
+			}
+			// Player automatically stands after doubling down
 		}
 		else if (e.getSource() == stand)
 		{
