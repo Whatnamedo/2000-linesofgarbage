@@ -350,6 +350,10 @@ public class BlackJackMain implements MouseListener{
 					dvalue.setForeground(Color.white);
 					dvalue.setBounds(460, 125, 200, 50);
 					dvalue.setFont(new Font("Monospace", Font.PLAIN, 15));
+					if (Blackjack.bettingAmount < Blackjack.bet && playerHand.getSize() < 3)
+					{
+						Double.setVisible(false);
+					}
 					game.add(table1);
 					game.add(table2);
 					game.add(table3);
