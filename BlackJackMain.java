@@ -201,6 +201,7 @@ public class BlackJackMain implements MouseListener{
 			
 			Card ind = d.draw();
 			playerHand.addCard(ind);
+			Double.setVisible(false);
 
 			int index = playerHand.getSize();
 			if (index == 3)
@@ -224,11 +225,11 @@ public class BlackJackMain implements MouseListener{
 		}
 		else if (e.getSource() == Double)
 		{
-			
+			Double.setVisible(false);
 		}
 		else if (e.getSource() == stand)
 		{
-			
+			Double.setVisible(false);
 		}
 		else if (e.getSource() == play)
 		{
