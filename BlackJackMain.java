@@ -21,6 +21,7 @@ public class BlackJackMain implements MouseListener{
 	private JButton stand = new JButton("STAND");
 	private JButton betton = new JButton("Bet");
 	private JButton backstart = new JButton("Back to Main Page");
+	private JButton bettons = new JButton("Bet");
 	private JFrame startframe = new JFrame("BlackJack");
 	private JFrame frame = new JFrame("BlackJack");
 	private JFrame betframe = new JFrame("BlackJack");
@@ -48,15 +49,6 @@ public class BlackJackMain implements MouseListener{
 	private JLabel backBet;
 	private JLabel deal1;
 	private JLabel deal2;
-	//
-	private JLabel deal3;
-	private JLabel deal4;
-	private JLabel deal5;
-	private JLabel deal6;
-	private JLabel deal7;
-	private JLabel deal8;
-	private JLabel deal9;
-	//
 	private JLabel turn;
 	private JLabel balance = new JLabel("Balance: $" + Blackjack.bettingAmount);
 	private JLabel bamount = new JLabel("Bet: $" + Blackjack.bet);
@@ -64,7 +56,9 @@ public class BlackJackMain implements MouseListener{
 	private JLabel bethere = new JLabel("How much would you like to bet?");
 	private JLabel value = new JLabel("Total Hand Value: ");
 	private JLabel dvalue = new JLabel("Dealer Hand Value: ");
+	private JLabel better = new JLabel("How much would you like to bet?");
 	private JTextField in = new JTextField();
+	private JTextField newbet = new JTextField();
 	private Deck d = new Deck();
 	private Hand playerHand = new Hand(false);
 	private Hand dealerHand = new Hand(true);
@@ -150,64 +144,36 @@ public class BlackJackMain implements MouseListener{
 		backBet = new JLabel(background[0]);
 		backBet.setOpaque(true);
 		backBet.setBounds(0, 0, 1000, 600);
-		//
+		table1 = new JLabel(cards[0]);
+		table2 = new JLabel(cards[1]);
 		table3 = new JLabel(cards[2]);
 		table3.setOpaque(true);
-		table3.setBounds(620,450,69,94);
+		table3.setBounds(340,450,69,94);
 		table3.setVisible(false);
 		table4 = new JLabel(cards[3]);
 		table4.setOpaque(true);
-		table4.setBounds(700,450,69,94);
+		table4.setBounds(420,450,69,94);
 		table4.setVisible(false);
 		table5 = new JLabel(cards[4]);
 		table5.setOpaque(true);
-		table5.setBounds(780,450,69,94);
+		table5.setBounds(500,450,69,94);
 		table5.setVisible(false);
 		table6 = new JLabel(cards[5]);
 		table6.setOpaque(true);
-		table6.setBounds(860,450,69,94);
+		table6.setBounds(580,450,69,94);
 		table6.setVisible(false);
 		table7 = new JLabel(cards[6]);
 		table7.setOpaque(true);
-		table7.setBounds(940,450,69,94);
+		table7.setBounds(660,450,69,94);
 		table7.setVisible(false);
 		table8 = new JLabel(cards[7]);
 		table8.setOpaque(true);
-		table8.setBounds(1020,450,69,94);
+		table8.setBounds(740,450,69,94);
 		table8.setVisible(false);
 		table9 = new JLabel(cards[8]);
 		table9.setOpaque(true);
-		table9.setBounds(1100,450,69,94);
+		table9.setBounds(820,450,69,94);
 		table9.setVisible(false);
-		deal3 = new JLabel(cards[2]);
-		deal3.setOpaque(true);
-		deal3.setBounds(620,450,69,94);
-		deal3.setVisible(false);
-		deal4 = new JLabel(cards[3]);
-		deal4.setOpaque(true);
-		deal4.setBounds(700,450,69,94);
-		deal4.setVisible(false);
-		deal5 = new JLabel(cards[4]);
-		deal5.setOpaque(true);
-		deal5.setBounds(780,450,69,94);
-		deal5.setVisible(false);
-		deal6 = new JLabel(cards[5]);
-		deal6.setOpaque(true);
-		deal6.setBounds(860,450,69,94);
-		deal6.setVisible(false);
-		deal7 = new JLabel(cards[6]);
-		deal7.setOpaque(true);
-		deal7.setBounds(940,450,69,94);
-		deal7.setVisible(false);
-		deal8 = new JLabel(cards[7]);
-		deal8.setOpaque(true);
-		deal8.setBounds(1020,450,69,94);
-		deal8.setVisible(false);
-		deal9 = new JLabel(cards[8]);
-		deal9.setOpaque(true);
-		deal9.setBounds(1100,450,69,94);
-		deal9.setVisible(false);
-		//
 		decks = new JLabel(deck[0]);
 		decks.setOpaque(true);
 		decks.setBounds(500, 200, 69, 94);
@@ -215,7 +181,8 @@ public class BlackJackMain implements MouseListener{
 		deal1.setOpaque(true);
 		deal1.setBounds(460,31,69,94);
 		turn = new JLabel(arrow[1]);
-		turn.setBounds(65, 250, 50, 100);
+		turn.setBounds(850, 250, 50, 100);
+		turn.setVisible(true);
 		balance.setForeground(Color.white);
 		balance.setBounds(10, 10, 250, 15);
 		bamount.setForeground(Color.cyan);
@@ -231,6 +198,14 @@ public class BlackJackMain implements MouseListener{
 		stand.setBounds(710, 350, 150, 50);
 		in.setBounds(400, 250, 200, 50);
 		betton.setBounds(450, 325, 100, 25);
+		better.setBounds(35, 180, 200, 50);
+		better.setForeground(Color.white);
+		better.setFont(new Font("Monospace", Font.PLAIN, 12));
+		better.setVisible(false);
+		newbet.setBounds(25, 225, 200, 30);
+		newbet.setVisible(false);
+		bettons.setBounds(75, 260, 100, 20);
+		bettons.setVisible(false);
 		bet.add(in);
 		bet.add(betton);
 		bet.add(bethere);
@@ -239,7 +214,7 @@ public class BlackJackMain implements MouseListener{
 		start.add(play);
 		start.add(info);
 		start.add(quit);
-		game.add(turn);
+//		game.add(turn);
 		game.add(balance);
 		game.add(bamount);
 		game.add(decks);
@@ -247,6 +222,9 @@ public class BlackJackMain implements MouseListener{
 		game.add(hit);
 		game.add(Double);
 		game.add(stand);
+		game.add(better);
+		game.add(newbet);
+		game.add(bettons);
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
@@ -260,7 +238,6 @@ public class BlackJackMain implements MouseListener{
 			Card ind = d.draw();
 			playerHand.addCard(ind);
 			Double.setVisible(false);
-
 			int index = playerHand.getSize();
 			if (index == 3)
 			{
@@ -320,9 +297,7 @@ public class BlackJackMain implements MouseListener{
 			Blackjack.bet *= 2;
 			Card ind = d.draw();
 			playerHand.addCard(ind);
-			hit.setVisible(false);
 			Double.setVisible(false);
-			stand.setVisible(false);
 			bamount.setText("Bet: $" + Blackjack.bet);
 			balance.setText("Balance: $" + Blackjack.bettingAmount);
 			
@@ -382,9 +357,7 @@ public class BlackJackMain implements MouseListener{
 		}
 		else if (e.getSource() == stand)
 		{
-			hit.setVisible(false);
 			Double.setVisible(false);
-			stand.setVisible(false);
 		}
 		else if (e.getSource() == play)
 		{
@@ -472,18 +445,14 @@ public class BlackJackMain implements MouseListener{
 					
 					Card ind = d.draw();
 					playerHand.addCard(ind);
-					table1 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+					table1.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table1.setOpaque(true);
-					//
-					table1.setBounds(460,450,69,94);
-					//
+					table1.setBounds(180,450,69,94);
 					ind = d.draw();
 					playerHand.addCard(ind);
-					table2 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+					table2.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table2.setOpaque(true);
-					//
-					table2.setBounds(540,450,69,94);
-					//
+					table2.setBounds(260,450,69,94);
 					ind = d.draw();
 					dealerHand.addCard(ind);
 					ind = d.draw();
