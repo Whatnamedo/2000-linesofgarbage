@@ -228,6 +228,10 @@ public class BlackJackMain implements MouseListener{
 				playerHand.subtractTotalValue();
 				value.setText("Hand Value: " + playerHand);
 			}
+			else if (playerHand.getTotalValue () > 21)
+			{
+				// PLAYER LOSE	
+			}
 		}
 		else if (e.getSource() == Double)
 		{
@@ -262,6 +266,10 @@ public class BlackJackMain implements MouseListener{
 			{
 				playerHand.subtractTotalValue();
 				value.setText("Hand Value: " + playerHand);
+			}
+			else if (playerHand.getTotalValue () > 21)
+			{
+				// PLAYER LOSE	
 			}
 			// Player automatically stands after doubling down
 		}
@@ -381,7 +389,15 @@ public class BlackJackMain implements MouseListener{
 					bamount.setText("Bet: $" + Blackjack.bet);
 					bamount.setFont(new Font("Monospace", Font.PLAIN, 15));
 					balances.setText("Balance: $" + Blackjack.bettingAmount);
-					value.setText("Hand Value: " + playerHand);
+					if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
+					{
+						playerHand.subtractTotalValue();
+						value.setText("Hand Value: " + playerHand);
+					}
+					else
+					{
+						value.setText("Hand Value: " + playerHand);
+					}
 					value.setBounds(485, 400, 200, 50);
 					value.setForeground(Color.white);
 					value.setFont(new Font("Monospace", Font.PLAIN, 15));
