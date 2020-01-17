@@ -140,15 +140,15 @@ public class BlackJackMain implements MouseListener{
 		table3 = new JLabel(cards[2]);
 		table3.setOpaque(true);
 		table3.setBounds(500,450,69,94);
-//		table3.setVisible(false);
+		table3.setVisible(false);
 		table4 = new JLabel(cards[3]);
 		table4.setOpaque(true);
 		table4.setBounds(580,450,69,94);
-//		table4.setVisible(false);
+		table4.setVisible(false);
 		table5 = new JLabel(cards[4]);
 		table5.setOpaque(true);
 		table5.setBounds(660,450,69,94);
-//		table5.setVisible(false);
+		table5.setVisible(false);
 		decks = new JLabel(deck[0]);
 		decks.setOpaque(true);
 		decks.setBounds(500, 200, 69, 94);
@@ -205,20 +205,21 @@ public class BlackJackMain implements MouseListener{
 			int index = playerHand.getSize();
 			if (index == 3)
 			{
-				System.out.println(ind.getRank() + "\n" + ind.getSuit());
 				table3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				
 				table3.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
 			}
 			else if (index == 4)
 			{
-				table4 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table4.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table4.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
 			}
 			else if (index == 5)
 			{
-				table5 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+				table5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table5.setVisible(true);
+				value.setText("Hand Value: " + playerHand);
 			}
 		}
 		else if (e.getSource() == Double)
