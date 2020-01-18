@@ -1,5 +1,3 @@
-package BlackJack_Game;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -285,13 +283,16 @@ public class BlackJackMain implements MouseListener{
 				if (x > Blackjack.bettingAmount || x < 1)	
 				{	
 					better.setText("Invalid Input! How much would you like to bet?");	
-					better.setBounds(25, 210, 350, 50);	
+					better.setBounds(15, 180, 250, 50);	
 				}	
 				else	
 				{	
 					bettons.setVisible(false);	
 					better.setVisible(false);	
-					newbet.setVisible(false);	
+					newbet.setVisible(false);
+					hit.setVisible(true);
+					stand.setVisible(true);
+					Double.setVisible(true);
 					d = new Deck();	
 					playerHand = new Hand(false);	
 					dealerHand = new Hand(true);	
@@ -307,12 +308,12 @@ public class BlackJackMain implements MouseListener{
 					playerHand.addCard(ind);	
 					table1.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);	
 					table1.setOpaque(true);	
-					table1.setBounds(180,450,69,94);	
+					table1.setBounds(460,450,69,94);
 					ind = d.draw();	
 					playerHand.addCard(ind);	
 					table2.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);	
 					table2.setOpaque(true);	
-					table2.setBounds(260,450,69,94);	
+					table2.setBounds(540,450,69,94);	
 					ind = d.draw();	
 					dealerHand.addCard(ind);	
 					ind = d.draw();	
@@ -355,8 +356,8 @@ public class BlackJackMain implements MouseListener{
 			}	
 			catch (NumberFormatException i)	
 			{	
-				bethere.setText("Invalid Input! How much would you like to bet?");	
-				bethere.setBounds(350, 210, 350, 50);	
+				better.setText("Invalid Input! How much would you like to bet?");	
+				better.setBounds(15, 180, 250, 50);	
 			}	
 		}	
 		else if (e.getSource() == hit)
