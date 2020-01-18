@@ -275,12 +275,10 @@ public class BlackJackMain implements MouseListener{
 	}
 	private void dealerturn (int i) throws InterruptedException
 	{
-		//TimeUnit.SECONDS.sleep(1);
 		while (i > 21 && dealerHand.getNumAces() > 0)
 		{
 			dealerHand.subtractTotalValue();
-			value.setText("Hand Value: " + playerHand); // Shouldn't this be 
-//			dvalue.setText("Dealer Hand Value: " + dealerHand);
+			dvalue.setText("Dealer Hand Value: " + dealerHand);
 		}
 		if (i >= 17)
 		{
@@ -303,7 +301,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 4)
 			{
 				deal4.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal4.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(380,31,69,94);
@@ -316,7 +313,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 5)
 			{
 				deal5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal5.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(340,31,69,94);
@@ -330,7 +326,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 6)
 			{
 				deal6.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal6.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(300,31,69,94);
@@ -345,7 +340,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 7)
 			{
 				deal7.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal7.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(260,31,69,94);
@@ -361,7 +355,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 8)
 			{
 				deal8.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal8.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(220,31,69,94);
@@ -378,7 +371,6 @@ public class BlackJackMain implements MouseListener{
 			else if (index == 9)
 			{
 				deal9.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal9.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(180,31,69,94);
@@ -393,6 +385,7 @@ public class BlackJackMain implements MouseListener{
 				deal9.setVisible(true);
 				TimeUnit.SECONDS.sleep(1);
 			}
+			dealerturn(dealerHand.getTotalValue());
 		}
 	}
 	public void mouseClicked (MouseEvent e)
@@ -588,6 +581,8 @@ public class BlackJackMain implements MouseListener{
 			else if (playerHand.getTotalValue () > 21)
 			{
 				// PLAYER LOSE	
+				bamount.setText("Bet: $0");
+				balance.setText("Balance: $" + Blackjack.bettingAmount);	
 				hit.setVisible(false);	
 				stand.setVisible(false);	
 				better.setVisible(true);	
@@ -595,7 +590,6 @@ public class BlackJackMain implements MouseListener{
 				better.setBounds(15, 180, 250, 50);	
 				newbet.setVisible(true);	
 				bettons.setVisible(true);
-				// update bet and balance amount at top left
 			}
 		}
 		else if (e.getSource() == Double)
@@ -627,6 +621,7 @@ public class BlackJackMain implements MouseListener{
 			{
 				// PLAYER LOSE	
 				bamount.setText("Bet: $0");
+				balance.setText("Balance: $" + Blackjack.bettingAmount);	
 				hit.setVisible(false);	
 				stand.setVisible(false);	
 				better.setVisible(true);	
@@ -634,7 +629,6 @@ public class BlackJackMain implements MouseListener{
 				better.setBounds(15, 180, 250, 50);	
 				newbet.setVisible(true);	
 				bettons.setVisible(true);
-				// update bet and balance amount at top left
 			}
 			else 
 			{
@@ -649,51 +643,50 @@ public class BlackJackMain implements MouseListener{
 					{
 						// DEALER LOSE	
 						bamount.setText("Bet: $0");
-						Blackjack.bettingAmount += (betamount*3);
+						Blackjack.bettingAmount += (betamount*2);
+						balance.setText("Balance: $" + Blackjack.bettingAmount);	
 						better.setVisible(true);	
 						better.setText("You won! How much would you like to bet?");	
 						better.setBounds(15, 180, 250, 50);	
 						newbet.setVisible(true);	
 						bettons.setVisible(true);
-						// update bet and balance amount at top left
 						TimeUnit.SECONDS.sleep(1);
 					}
 					else if (i > 16)
 					{
-						bamount.setText("Bet: $0");
 						if (dealerHand.getTotalValue() < playerHand.getTotalValue())
 						{
-							Blackjack.bettingAmount += (betamount*3);
+							Blackjack.bettingAmount += (betamount*2);
 							bamount.setText("Bet: $0");
+							balance.setText("Balance: $" + Blackjack.bettingAmount);	
 							better.setText("You won! How much would you like to bet?");
 							better.setBounds(25, 180, 260, 50);
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							// update bet and balance amount at top left
 							TimeUnit.SECONDS.sleep(1);
 						}
 						else if (dealerHand.getTotalValue() == playerHand.getTotalValue())
 						{
 							Blackjack.bettingAmount += betamount;
 							bamount.setText("Bet: $0");
+							balance.setText("Balance: $" + Blackjack.bettingAmount);	
 							better.setText("You tied! How much would you like to bet?");
 							better.setBounds(25, 180, 260, 50);
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							// update bet and balance amount at top left
 							TimeUnit.SECONDS.sleep(1);
 						}
 						else if (dealerHand.getTotalValue() > playerHand.getTotalValue())
 						{
 							bamount.setText("Bet: $0");
+							balance.setText("Balance: $" + Blackjack.bettingAmount);	
 							better.setText("You lost! How much would you like to bet?");
 							better.setBounds(25, 180, 260, 50);
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							// update bet and balance amount at top left
 							TimeUnit.SECONDS.sleep(1);
 						}
 					}
@@ -720,12 +713,12 @@ public class BlackJackMain implements MouseListener{
 					// DEALER LOSE	
 					Blackjack.bettingAmount += (2*betamount);
 					bamount.setText("Bet: $0");
+					balance.setText("Balance: $" + Blackjack.bettingAmount);	
 					better.setVisible(true);	
 					better.setText("You won! How much would you like to bet?");	
 					better.setBounds(15, 180, 250, 50);	
 					newbet.setVisible(true);	
 					bettons.setVisible(true);
-					// update bet and balance amount at top left
 					TimeUnit.SECONDS.sleep(1);
 				}
 				else if (i > 16)
@@ -735,35 +728,35 @@ public class BlackJackMain implements MouseListener{
 					{
 						Blackjack.bettingAmount += (2*betamount);
 						bamount.setText("Bet: $0");
+						balance.setText("Balance: $" + Blackjack.bettingAmount);	
 						better.setText("You won! How much would you like to bet?");
 						better.setBounds(25, 180, 260, 50);
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						// update bet and balance amount at top left
 						TimeUnit.SECONDS.sleep(1);
 					}
 					else if (dealerHand.getTotalValue() == playerHand.getTotalValue())
 					{
 						Blackjack.bettingAmount += betamount;
 						bamount.setText("Bet: $0");
+						balance.setText("Balance: $" + Blackjack.bettingAmount);	
 						better.setText("You tied! How much would you like to bet?");
 						better.setBounds(25, 180, 260, 50);
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						// update bet and balance amount at top left
 						TimeUnit.SECONDS.sleep(1);
 					}
 					else if (dealerHand.getTotalValue() > playerHand.getTotalValue())
 					{
 						bamount.setText("Bet: $0");
+						balance.setText("Balance: $" + Blackjack.bettingAmount);	
 						better.setText("You lost! How much would you like to bet?");
 						better.setBounds(25, 180, 260, 50);
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						// update bet and balance amount at top left
 						TimeUnit.SECONDS.sleep(1);
 					}
 				}
