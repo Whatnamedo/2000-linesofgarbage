@@ -51,7 +51,6 @@ public class BlackJackMain implements MouseListener{
 	private JLabel backBet;
 	private JLabel deal1;
 	private JLabel deal2;
-	//
 	private JLabel deal3;
 	private JLabel deal4;
 	private JLabel deal5;
@@ -59,7 +58,6 @@ public class BlackJackMain implements MouseListener{
 	private JLabel deal7;
 	private JLabel deal8;
 	private JLabel deal9;
-	//
 	private Card hold;
 	private JLabel turn;
 	private JLabel balance = new JLabel("Balance: $" + Blackjack.bettingAmount);
@@ -189,41 +187,40 @@ public class BlackJackMain implements MouseListener{
 		table9.setOpaque(true);
 		table9.setBounds(1100,450,69,94);
 		table9.setVisible(false);
-		deal3 = new JLabel(cards[2]);
-		deal3.setOpaque(true);
-		deal3.setBounds(620,450,69,94);
-		deal3.setVisible(false);
-		deal4 = new JLabel(cards[3]);
-		deal4.setOpaque(true);
-		deal4.setBounds(700,450,69,94);
-		deal4.setVisible(false);
-		deal5 = new JLabel(cards[4]);
-		deal5.setOpaque(true);
-		deal5.setBounds(780,450,69,94);
-		deal5.setVisible(false);
-		deal6 = new JLabel(cards[5]);
-		deal6.setOpaque(true);
-		deal6.setBounds(860,450,69,94);
-		deal6.setVisible(false);
-		deal7 = new JLabel(cards[6]);
-		deal7.setOpaque(true);
-		deal7.setBounds(940,450,69,94);
-		deal7.setVisible(false);
-		deal8 = new JLabel(cards[7]);
-		deal8.setOpaque(true);
-		deal8.setBounds(1020,450,69,94);
-		deal8.setVisible(false);
-		deal9 = new JLabel(cards[8]);
-		deal9.setOpaque(true);
-		deal9.setBounds(1100,450,69,94);
-		deal9.setVisible(false);
-		//
-		decks = new JLabel(deck[0]);
-		decks.setOpaque(true);
-		decks.setBounds(500, 200, 69, 94);
 		deal1 = new JLabel(back[0]);
 		deal1.setOpaque(true);
 		deal1.setBounds(460,31,69,94);
+		deal3 = new JLabel(cards[2]);
+		deal3.setOpaque(true);
+		deal3.setBounds(620,31,69,94);
+		deal3.setVisible(false);
+		deal4 = new JLabel(cards[3]);
+		deal4.setOpaque(true);
+		deal4.setBounds(700,31,69,94);
+		deal4.setVisible(false);
+		deal5 = new JLabel(cards[4]);
+		deal5.setOpaque(true);
+		deal5.setBounds(780,31,69,94);
+		deal5.setVisible(false);
+		deal6 = new JLabel(cards[5]);
+		deal6.setOpaque(true);
+		deal6.setBounds(860,31,69,94);
+		deal6.setVisible(false);
+		deal7 = new JLabel(cards[6]);
+		deal7.setOpaque(true);
+		deal7.setBounds(940,31,69,94);
+		deal7.setVisible(false);
+		deal8 = new JLabel(cards[7]);
+		deal8.setOpaque(true);
+		deal8.setBounds(1020,31,69,94);
+		deal8.setVisible(false);
+		deal9 = new JLabel(cards[8]);
+		deal9.setOpaque(true);
+		deal9.setBounds(1100,31,69,94);
+		deal9.setVisible(false);
+		decks = new JLabel(deck[0]);
+		decks.setOpaque(true);
+		decks.setBounds(500, 200, 69, 94);
 		turn = new JLabel(arrow[1]);
 		turn.setBounds(850, 250, 50, 100);	
 		turn.setVisible(true);
@@ -277,20 +274,33 @@ public class BlackJackMain implements MouseListener{
 	}
 	private void dealerturn (int i) throws InterruptedException
 	{
-		Thread.sleep(1000);
-		if (i > 17)
+		while (i > 21 && dealerHand.getNumAces() > 0)
 		{
+			dealerHand.subtractTotalValue();
+			value.setText("Hand Value: " + playerHand);
+		}
+		if (i > 21)
+		{
+			// DEALER LOSE	
+			bamount.setText("Bet: $0");
+			better.setVisible(true);	
+			better.setText("You won! How much would you like to bet?");	
+			better.setBounds(15, 180, 250, 50);	
+			newbet.setVisible(true);	
+			bettons.setVisible(true);
+		}
+		else if (i > 16)
+		{
+			bamount.setText("Bet: $0");
 			if (dealerHand.getTotalValue() < playerHand.getTotalValue())
 			{
-				Blackjack.bettingAmount += betamount;
-				Blackjack.bettingAmount += betamount;
+				Blackjack.bettingAmount += (2*betamount);
 				bamount.setText("Bet: $0");
 				better.setText("You won! How much would you like to bet?");
 				better.setBounds(25, 180, 260, 50);
 				better.setVisible(true);
 				bettons.setVisible(true);
 				newbet.setVisible(true);
-				Thread.sleep(1000);
 			}
 			else if (dealerHand.getTotalValue() == playerHand.getTotalValue())
 			{
@@ -301,9 +311,8 @@ public class BlackJackMain implements MouseListener{
 				better.setVisible(true);
 				bettons.setVisible(true);
 				newbet.setVisible(true);
-				Thread.sleep(1000);
 			}
-			else
+			else if (dealerHand.getTotalValue() > playerHand.getTotalValue())
 			{
 				bamount.setText("Bet: $0");
 				better.setText("You lost! How much would you like to bet?");
@@ -311,8 +320,8 @@ public class BlackJackMain implements MouseListener{
 				better.setVisible(true);
 				bettons.setVisible(true);
 				newbet.setVisible(true);
-				Thread.sleep(1000);
 			}
+			TimeUnit.SECONDS.sleep(1);
 		}
 		else
 		{
@@ -322,9 +331,11 @@ public class BlackJackMain implements MouseListener{
 			if (index == 3)
 			{
 				deal3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				deal3.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(420,31,69,94);
+				deal2.setBounds(500,31,69,94);
+				deal3.setBounds(580,31,69,94);
+				deal3.setVisible(true);
 			}
 			else if (index == 4)
 			{
@@ -332,6 +343,11 @@ public class BlackJackMain implements MouseListener{
 				deal4.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(380,31,69,94);
+				deal2.setBounds(460,31,69,94);
+				deal3.setBounds(540,31,69,94);
+				deal4.setBounds(620,31,69,94);
+				deal4.setVisible(true);
 			}
 			else if (index == 5)
 			{
@@ -339,6 +355,12 @@ public class BlackJackMain implements MouseListener{
 				deal5.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(340,31,69,94);
+				deal2.setBounds(420,31,69,94);
+				deal3.setBounds(500,31,69,94);
+				deal4.setBounds(580,31,69,94);
+				deal5.setBounds(700,31,69,94);
+				deal5.setVisible(true);
 			}
 			else if (index == 6)
 			{
@@ -346,6 +368,13 @@ public class BlackJackMain implements MouseListener{
 				deal6.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(300,31,69,94);
+				deal2.setBounds(380,31,69,94);
+				deal3.setBounds(460,31,69,94);
+				deal4.setBounds(540,31,69,94);
+				deal5.setBounds(660,31,69,94);
+				deal6.setBounds(780,31,69,94);
+				deal6.setVisible(true);
 			}
 			else if (index == 7)
 			{
@@ -353,6 +382,14 @@ public class BlackJackMain implements MouseListener{
 				deal7.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(260,31,69,94);
+				deal2.setBounds(340,31,69,94);
+				deal3.setBounds(420,31,69,94);
+				deal4.setBounds(500,31,69,94);
+				deal5.setBounds(620,31,69,94);
+				deal6.setBounds(740,31,69,94);
+				deal7.setBounds(860,31,69,94);
+				deal7.setVisible(true);
 			}
 			else if (index == 8)
 			{
@@ -360,6 +397,15 @@ public class BlackJackMain implements MouseListener{
 				deal8.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(220,31,69,94);
+				deal2.setBounds(300,31,69,94);
+				deal3.setBounds(380,31,69,94);
+				deal4.setBounds(460,31,69,94);
+				deal5.setBounds(580,31,69,94);
+				deal6.setBounds(700,31,69,94);
+				deal7.setBounds(820,31,69,94);
+				deal8.setBounds(940,31,69,94);
+				deal8.setVisible(true);
 			}
 			else if (index == 9)
 			{
@@ -367,7 +413,18 @@ public class BlackJackMain implements MouseListener{
 				deal9.setVisible(true);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
 				dealerturn(dealerHand.getTotalValue());
+				deal1.setBounds(180,31,69,94);
+				deal2.setBounds(260,31,69,94);
+				deal3.setBounds(340,31,69,94);
+				deal4.setBounds(420,31,69,94);
+				deal5.setBounds(540,31,69,94);
+				deal6.setBounds(660,31,69,94);
+				deal7.setBounds(780,31,69,94);
+				deal8.setBounds(900,31,69,94);
+				deal9.setBounds(980,31,69,94);
+				deal9.setVisible(true);
 			}
+			TimeUnit.SECONDS.sleep(1);
 		}
 	}
 	public void mouseClicked (MouseEvent e)
@@ -474,24 +531,19 @@ public class BlackJackMain implements MouseListener{
 			{
 				table3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(420,450,69,94);
 				table2.setBounds(500,450,69,94);
 				table3.setBounds(580,450,69,94);
-				//
 				table3.setVisible(true);
-				value.setText("Hand Value: " + playerHand);
 			}
 			else if (index == 4)
 			{
 				table4.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(380,450,69,94);
 				table2.setBounds(460,450,69,94);
 				table3.setBounds(540,450,69,94);
 				table4.setBounds(620,450,69,94);
-				//
 				table4.setVisible(true);
 			}
 			else if (index == 5)
@@ -499,34 +551,29 @@ public class BlackJackMain implements MouseListener{
 				table5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table5.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(340,450,69,94);
 				table2.setBounds(420,450,69,94);
 				table3.setBounds(500,450,69,94);
 				table4.setBounds(580,450,69,94);
 				table5.setBounds(660,450,69,94);
-				//
 			}
 			else if (index == 6)
 			{
 				table6.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table6.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(300,450,69,94);
 				table2.setBounds(380,450,69,94);
 				table3.setBounds(460,450,69,94);
 				table4.setBounds(540,450,69,94);
 				table5.setBounds(620,450,69,94);
 				table6.setBounds(700,450,69,94);
-				//
 			}
 			else if (index == 7)
 			{
 				table7.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table7.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(260,450,69,94);
 				table2.setBounds(340,450,69,94);
 				table3.setBounds(420,450,69,94);
@@ -534,14 +581,12 @@ public class BlackJackMain implements MouseListener{
 				table5.setBounds(580,450,69,94);
 				table6.setBounds(660,450,69,94);
 				table7.setBounds(740,450,69,94);
-				//
 			}
 			else if (index == 8)
 			{
 				table8.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table8.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(220,450,69,94);
 				table2.setBounds(300,450,69,94);
 				table3.setBounds(380,450,69,94);
@@ -550,14 +595,12 @@ public class BlackJackMain implements MouseListener{
 				table6.setBounds(620,450,69,94);
 				table7.setBounds(700,450,69,94);
 				table8.setBounds(780,450,69,94);
-				//
 			}
 			else if (index == 9)
 			{
 				table9.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				table9.setVisible(true);
 				value.setText("Hand Value: " + playerHand);
-				//
 				table1.setBounds(180,450,69,94);
 				table2.setBounds(260,450,69,94);
 				table3.setBounds(340,450,69,94);
@@ -567,7 +610,6 @@ public class BlackJackMain implements MouseListener{
 				table7.setBounds(660,450,69,94);
 				table8.setBounds(740,450,69,94);
 				table9.setBounds(820,450,69,94);
-				//
 			}
 			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
 			{
@@ -598,35 +640,43 @@ public class BlackJackMain implements MouseListener{
 			bamount.setText("Bet: $" + Blackjack.bet);
 			balance.setText("Balance: $" + Blackjack.bettingAmount);
 			
-			int index = playerHand.getSize();
-			if (index == 3)
-			{
-				table3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
-				table3.setVisible(true);
-				value.setText("Hand Value: " + playerHand);
-				//
-				table1.setBounds(420,450,69,94);
-				table2.setBounds(500,450,69,94);
-				table3.setBounds(580,450,69,94);
-				//
-			}
-			if (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
+			table3.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
+			table3.setVisible(true);
+			value.setText("Hand Value: " + playerHand);
+			table1.setBounds(420,450,69,94);
+			table2.setBounds(500,450,69,94);
+			table3.setBounds(580,450,69,94);
+			
+			while (playerHand.getTotalValue() > 21 && playerHand.getNumAces() > 0)
 			{
 				playerHand.subtractTotalValue();
 				value.setText("Hand Value: " + playerHand);
 			}
-			else if (playerHand.getTotalValue () > 21)
+			if (playerHand.getTotalValue () > 21)
 			{
 				// PLAYER LOSE	
+				bamount.setText("Bet: $0");
+				hit.setVisible(false);	
+				stand.setVisible(false);	
+				better.setVisible(true);	
+				better.setText("You busted, How much would you like to bet?");	
+				better.setBounds(15, 180, 250, 50);	
+				newbet.setVisible(true);	
+				bettons.setVisible(true);
 			}
-			deal1.setIcon(cards[(hold.getRank()*4)-(5-hold.getSuit())]);
-			dvalue.setText("Dealer Hand Value: " + dealerHand);
-			try 
+			else 
 			{
-				dealerturn(dealerHand.getTotalValue());
-			} 
-			catch (InterruptedException e1) 
-			{
+				dealerHand.show();
+				deal1.setIcon(cards[(hold.getRank()*4)-(5-hold.getSuit())]);
+				dvalue.setText("Dealer Hand Value: " + dealerHand);
+					
+				try 
+				{
+					dealerturn(dealerHand.getTotalValue());
+				} 
+				catch (InterruptedException e1) 
+				{
+				}
 			}
 		}
 		else if (e.getSource() == stand)
@@ -634,6 +684,7 @@ public class BlackJackMain implements MouseListener{
 			hit.setVisible(false);
 			Double.setVisible(false);
 			stand.setVisible(false);
+			dealerHand.show();
 			deal1.setIcon(cards[(hold.getRank()*4)-(5-hold.getSuit())]);
 			dvalue.setText("Dealer Hand Value: " + dealerHand);
 			try 
@@ -734,17 +785,13 @@ public class BlackJackMain implements MouseListener{
 					table1.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table1 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table1.setOpaque(true);
-					//
 					table1.setBounds(460,450,69,94);
-					//
 					ind = d.draw();
 					playerHand.addCard(ind);
 					table2 = new JLabel(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table2.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 					table2.setOpaque(true);
-					//
 					table2.setBounds(540,450,69,94);
-					//
 					ind = d.draw();
 					dealerHand.addCard(ind);
 					hold = ind;
