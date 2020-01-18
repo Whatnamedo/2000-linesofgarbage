@@ -718,6 +718,7 @@ public class BlackJackMain implements MouseListener{
 				if (i > 21)
 				{
 					// DEALER LOSE	
+					Blackjack.bettingAmount += (2*betamount);
 					bamount.setText("Bet: $0");
 					better.setVisible(true);	
 					better.setText("You won! How much would you like to bet?");	
