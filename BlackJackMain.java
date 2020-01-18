@@ -664,7 +664,6 @@ public class BlackJackMain implements MouseListener{
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							System.out.println("smaller");
 //							TimeUnit.SECONDS.sleep(1);
 						}
 						else if (dealerHand.getTotalValue() == playerHand.getTotalValue())
@@ -676,7 +675,6 @@ public class BlackJackMain implements MouseListener{
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							System.out.println("equal");
 //							TimeUnit.SECONDS.sleep(1);
 						}
 						else if (dealerHand.getTotalValue() > playerHand.getTotalValue())
@@ -687,7 +685,6 @@ public class BlackJackMain implements MouseListener{
 							better.setVisible(true);
 							bettons.setVisible(true);
 							newbet.setVisible(true);
-							System.out.println("bigger");
 //							TimeUnit.SECONDS.sleep(1);
 						}
 					}
@@ -732,7 +729,6 @@ public class BlackJackMain implements MouseListener{
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						System.out.println("smaller");
 //						TimeUnit.SECONDS.sleep(1);
 					}
 					else if (dealerHand.getTotalValue() == playerHand.getTotalValue())
@@ -744,7 +740,6 @@ public class BlackJackMain implements MouseListener{
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						System.out.println("equal");
 //						TimeUnit.SECONDS.sleep(1);
 					}
 					else if (dealerHand.getTotalValue() > playerHand.getTotalValue())
@@ -755,7 +750,6 @@ public class BlackJackMain implements MouseListener{
 						better.setVisible(true);
 						bettons.setVisible(true);
 						newbet.setVisible(true);
-						System.out.println("bigger");
 //						TimeUnit.SECONDS.sleep(1);
 					}
 				}
