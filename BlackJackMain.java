@@ -279,6 +279,7 @@ public class BlackJackMain implements MouseListener{
 		{
 			dealerHand.subtractTotalValue();
 			dvalue.setText("Dealer Hand Value: " + dealerHand);
+			i -= 10;
 		}
 		if (i >= 17)
 		{
