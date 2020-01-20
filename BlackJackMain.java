@@ -10,11 +10,9 @@ import java.awt.MediaTracker;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.*;
 
 public class BlackJackMain implements MouseListener{
-	private int imageNo = 0;
 	private JButton play = new JButton("Play BlackJack");
 	private JButton info = new JButton("How to Play");
 	private JButton quit = new JButton("Quit");
@@ -24,6 +22,7 @@ public class BlackJackMain implements MouseListener{
 	private JButton betton = new JButton("Bet");
 	private JButton backstart = new JButton("Back to Main Page");
 	private JButton bettons = new JButton("Bet");	
+	private JButton cashout = new JButton("Cash Out");
 	private JFrame startframe = new JFrame("BlackJack");
 	private JFrame frame = new JFrame("BlackJack");
 	private JFrame betframe = new JFrame("BlackJack");
@@ -247,6 +246,8 @@ public class BlackJackMain implements MouseListener{
 		newbet.setVisible(false);	
 		bettons.setBounds(75, 260, 100, 20);	
 		bettons.setVisible(false);
+		cashout.setBounds(800, 150, 100, 50);
+		cashout.setVisible(true);
 		bet.add(in);
 		bet.add(betton);
 		bet.add(bethere);
@@ -266,10 +267,11 @@ public class BlackJackMain implements MouseListener{
 		game.add(better);	
 		game.add(newbet);	
 		game.add(bettons);
+		game.add(cashout);
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
-		startframe.setLocation(800,300);
+		startframe.setLocation(665,300);
 	}
 	private void dealerturn (int i) throws InterruptedException
 	{
@@ -301,7 +303,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal4.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(380,31,69,94);
 				deal2.setBounds(460,31,69,94);
 				deal3.setBounds(540,31,69,94);
@@ -314,7 +315,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal5.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(340,31,69,94);
 				deal2.setBounds(420,31,69,94);
 				deal3.setBounds(500,31,69,94);
@@ -328,7 +328,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal6.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(300,31,69,94);
 				deal2.setBounds(380,31,69,94);
 				deal3.setBounds(460,31,69,94);
@@ -343,7 +342,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal7.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(260,31,69,94);
 				deal2.setBounds(340,31,69,94);
 				deal3.setBounds(420,31,69,94);
@@ -359,7 +357,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal8.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(220,31,69,94);
 				deal2.setBounds(300,31,69,94);
 				deal3.setBounds(380,31,69,94);
@@ -376,7 +373,6 @@ public class BlackJackMain implements MouseListener{
 			{
 				deal9.setIcon(cards[(ind.getRank()*4)-(5-ind.getSuit())]);
 				dvalue.setText("Dealer Hand Value: " + dealerHand);
-				dealerturn(dealerHand.getTotalValue());
 				deal1.setBounds(180,31,69,94);
 				deal2.setBounds(260,31,69,94);
 				deal3.setBounds(340,31,69,94);
@@ -939,6 +935,11 @@ public class BlackJackMain implements MouseListener{
 		{
 			infoframe.setVisible(false);
 			startframe.setVisible(true);
+		}
+		else if (e.getSource() == cashout)
+		{
+			End finish = new End(Blackjack.bettingAmount);
+			
 		}
     }
     
