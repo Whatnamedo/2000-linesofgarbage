@@ -83,6 +83,7 @@ public class BlackJackMain implements MouseListener{
 		quit.addMouseListener(this);
 		betton.addMouseListener(this);
 		backstart.addMouseListener(this);
+		cashout.addMouseListener(this);
 		start.setPreferredSize(new Dimension(300,300));
 		start.setLayout (new GridLayout(3,0));
 		game.setPreferredSize(new Dimension(1000,600));
@@ -271,7 +272,7 @@ public class BlackJackMain implements MouseListener{
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
-		startframe.setLocation(665,300);
+		startframe.setLocation(550,250);
 	}
 	private void dealerturn (int i) throws InterruptedException
 	{
@@ -697,6 +698,12 @@ public class BlackJackMain implements MouseListener{
 					System.out.println("Problem");
 				}
 			}
+			if (Blackjack.bettingAmount <= 0)
+			{
+				frame.setVisible(false);
+				Blackjack.bettingAmount = 10000;
+				End thing = new End();
+			}
 		}
 		else if (e.getSource() == stand)
 		{
@@ -763,6 +770,12 @@ public class BlackJackMain implements MouseListener{
 			catch (InterruptedException e1) 
 			{
 				System.out.println("Problem");
+			}
+			if (Blackjack.bettingAmount <= 0)
+			{
+				frame.setVisible(false);
+				Blackjack.bettingAmount = 10000;
+				End thing = new End();
 			}
 		}
 		else if (e.getSource() == play)
@@ -939,8 +952,9 @@ public class BlackJackMain implements MouseListener{
 		}
 		else if (e.getSource() == cashout)
 		{
+			frame.setVisible(false);
+			Blackjack.bettingAmount = 10000;
 			End finish = new End(Blackjack.bettingAmount);
-			
 		}
     }
     
