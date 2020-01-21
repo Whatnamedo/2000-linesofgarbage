@@ -1,3 +1,5 @@
+package BlackJack_Game;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -590,7 +592,20 @@ public class BlackJackMain implements MouseListener{
 				bamount.setText("Bet: $0");
 				balance.setText("Balance: $" + Blackjack.bettingAmount);	
 				hit.setVisible(false);	
-				stand.setVisible(false);	
+				stand.setVisible(false);
+				if (Blackjack.bettingAmount <= 0)
+				{
+					try
+					{
+						TimeUnit.SECONDS.sleep(1);
+					}
+					catch(InterruptedException f)
+					{
+					}
+					frame.setVisible(false);
+					Blackjack.bettingAmount = 10000;
+					End thing = new End();
+				}
 				better.setVisible(true);	
 				better.setText("You busted, How much would you like to bet?");	
 				better.setBounds(15, 180, 250, 50);	
