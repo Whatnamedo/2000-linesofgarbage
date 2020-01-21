@@ -13,7 +13,6 @@ public class End extends JPanel implements MouseListener{
 		frame.setLocation(50,50);
 		this.setSize(1000,600);
 		this.setBackground(Color.black);
-		this.setLocation(50,50);
 		frame.add(this);
 		draw(this.getGraphics(), 0);
 		this.addMouseListener(this);
@@ -24,6 +23,7 @@ public class End extends JPanel implements MouseListener{
 		frame.setSize(1000, 600);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setLocation(50,50);
 		this.setSize(1000,600);
 		this.setBackground(Color.green);
 		frame.add(this);
@@ -39,6 +39,17 @@ public class End extends JPanel implements MouseListener{
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
 			g.drawString("Cashed Out!", 415, 275);
 			g.drawString("You cashed out with $" + i, 300, 325);
+			int profit = 0;
+			if (i >= 10000)
+			{
+				profit = i - 10000;
+				g.drawString("Profit $" + profit + "!", 420, 375);
+			}
+			else if (i < 10000)
+			{
+				profit = 10000 - i;
+				g.drawString("Loss: $" + profit + "!", 420, 375);
+			}
 		}
 		else
 		{
@@ -53,7 +64,10 @@ public class End extends JPanel implements MouseListener{
 		frame.setVisible(false);
 		BlackJackMain game = new BlackJackMain();
 	}
-
+//	public static void main(String[] args)
+//	{
+//		End n = new End(10001);
+//	}
 	public void mousePressed(MouseEvent e) {
 		
 	}
