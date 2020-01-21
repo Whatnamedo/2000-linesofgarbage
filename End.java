@@ -1,29 +1,22 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.concurrent.TimeUnit;
 
 public class End extends JPanel implements MouseListener{
 	private JFrame frame = new JFrame("Blackjack");
-	private ImageIcon[] background = new ImageIcon[1];
-	private JButton back = new JButton("Go Back");
-	private JLabel backboard;
-	private int condition;
 	
 	public End()
 	{
 		frame.setSize(1000, 600);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setLocation(50,50);
 		this.setSize(1000,600);
 		this.setBackground(Color.black);
-		background[0] = new ImageIcon("blueback1.jpg");
-		backboard = new JLabel(background[0]);
-		backboard.setBounds(0, 0, 1000, 600);
-		this.add(backboard);
-		condition = 0;
+		this.setLocation(50,50);
 		frame.add(this);
-		draw(this.getGraphics());
+		draw(this.getGraphics(), 0);
+		this.addMouseListener(this);
 	}
 	
 	public End(int i)
@@ -32,43 +25,33 @@ public class End extends JPanel implements MouseListener{
 		frame.setLayout(null);
 		frame.setVisible(true);
 		this.setSize(1000,600);
-		this.setBackground(Color.black);
-		background[0] = new ImageIcon("blueback1.jpg");
-		backboard = new JLabel(background[0]);
-		backboard.setBounds(0, 0, 1000, 600);
-		this.add(backboard);
-		condition = 1;
+		this.setBackground(Color.green);
 		frame.add(this);
-		draw(this.getGraphics());
+		draw(this.getGraphics(), i);
+		this.addMouseListener(this);
 	}
 	
-	public void draw(Graphics g)
+	public void draw(Graphics g, int i)
 	{
-		if (condition == 0)
+		if (i > 0)
 		{
-			g.setColor(Color.black);
-			g.fillRect(0, 0, 1000, 600);
+			g.setColor(Color.white);
+			g.setFont(new Font("Monospaced", Font.BOLD, 35));
+			g.drawString("Cashed Out!", 415, 275);
+			g.drawString("You cashed out with $" + i, 300, 325);
+		}
+		else
+		{
 			g.setColor(Color.red);
-			g.fillRect(280, 200, 500, 200);
-			g.setColor(Color.black);
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
 			g.drawString("You Lose!", 425, 275);
 			g.drawString("You ran out of money!", 325, 325);
 		}
-		else if (condition == 1)
-		{
-			g.setColor(Color.green);
-			g.setFont(new Font("Monospaced", Font.BOLD, 35));
-			g.drawString("You Win!", 450, 300);
-		}
-		
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == back)
-		{
-			BlackJackMain game = new BlackJackMain();
-		}
+		frame.setVisible(false);
+		BlackJackMain game = new BlackJackMain();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -85,10 +68,5 @@ public class End extends JPanel implements MouseListener{
 
 	public void mouseExited(MouseEvent e) {
 		
-	}
-	
-	public static void main(String[] args)
-	{
-		End thing = new End();
 	}
 }
