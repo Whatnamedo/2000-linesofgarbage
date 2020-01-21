@@ -834,7 +834,7 @@ public class BlackJackMain implements MouseListener{
 			CardValues.setBounds(15, 140, 1000, 40);
 			CardValues.setForeground(Color.white);
 			Betting = new JLabel ();
-			Betting.setText("<html><b><u>Betting:</u></b><br>Before the dealing begins, each player places a bet in chips. The minimum bet is 1 chip, there is no maximum bet.</html>");
+			Betting.setText("<html><b><u>Betting:</u></b><br>Before the dealing begins, the player places a bet in dollars. The minimum bet is $1, there is no maximum bet.</html>");
 			Betting.setFont(new Font("Monospace", Font.PLAIN, 15));
 			Betting.setBounds(15, 210, 1000, 40);
 			Betting.setForeground(Color.white);
@@ -849,9 +849,9 @@ public class BlackJackMain implements MouseListener{
 			DealerTurn.setBounds(15, 390, 1000, 80);
 			DealerTurn.setForeground(Color.white);
 			DoublingDown = new JLabel ();
-			DoublingDown.setText("<html><b><u>Doubling Down:</u></b><br>Another option available to the player is known as “double down”. When a player chooses to “double down”, they place a bet equal to the original bet <br> and the dealer deals them one card. Note that the dealer doesn’t have the option to “double down.</html>");
+			DoublingDown.setText("<html><b><u>Doubling Down:</u></b><br>Another option available to the player is known as “double down”. When a player chooses to “double down”, they place a bet equal to the original bet <br> and the dealer deals them one card. Note that the dealer doesn’t have the option to “double down. You can only double down when you have two <br> cards, and your bet is less than or equal to half of your balance.</html>");
 			DoublingDown.setFont(new Font("Monospace", Font.PLAIN, 15));
-			DoublingDown.setBounds(15, 500, 1000, 60);
+			DoublingDown.setBounds(15, 500, 1000, 80);
 			DoublingDown.setForeground(Color.white);
 			backMain.add(backstart);
 			backMain.add(HowToPlay);
