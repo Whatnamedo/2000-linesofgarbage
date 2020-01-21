@@ -14,7 +14,7 @@ public class End extends JPanel implements MouseListener{
 		{
 			g.setColor(Color.white);
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
-			g.drawString("Cashed Out!", 340, 235);
+			g.drawString("Cashed Out!", 345, 235);
 			g.drawString("You cashed out with: $" + value, 210, 285);
 			int profit = 0;
 			if (value >= 10000)
@@ -25,11 +25,12 @@ public class End extends JPanel implements MouseListener{
 			else if (value < 10000)
 			{
 				profit = 10000 - value;
-				g.drawString("Loss: $" + profit, 340, 335);
+				g.drawString("Loss: $" + profit, 345, 335);
 			}
 		}
 		else
 		{
+			this.setBackground(Color.black);
 			g.setColor(Color.red);
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
 			g.drawString("You Lose!", 360, 255);
