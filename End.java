@@ -1,3 +1,5 @@
+package BlackJack_Game;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -12,26 +14,26 @@ public class End extends JPanel implements MouseListener{
 		{
 			g.setColor(Color.white);
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
-			g.drawString("Cashed Out!", 415, 275);
-			g.drawString("You cashed out with: $" + value, 300, 325);
+			g.drawString("Cashed Out!", 340, 235);
+			g.drawString("You cashed out with: $" + value, 210, 285);
 			int profit = 0;
 			if (value >= 10000)
 			{
 				profit = value - 10000;
-				g.drawString("Profit $" + profit, 420, 375);
+				g.drawString("Profit $" + profit, 340, 335);
 			}
 			else if (value < 10000)
 			{
 				profit = 10000 - value;
-				g.drawString("Loss: $" + profit, 420, 375);
+				g.drawString("Loss: $" + profit, 340, 335);
 			}
 		}
 		else
 		{
 			g.setColor(Color.red);
 			g.setFont(new Font("Monospaced", Font.BOLD, 35));
-			g.drawString("You Lose!", 425, 275);
-			g.drawString("You ran out of money!", 315, 325);
+			g.drawString("You Lose!", 360, 255);
+			g.drawString("You ran out of money!", 230, 305);
 		}
 
 	}
