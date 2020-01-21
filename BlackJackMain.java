@@ -1,5 +1,3 @@
-package BlackJack_Game;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -603,8 +601,8 @@ public class BlackJackMain implements MouseListener{
 					{
 					}
 					frame.setVisible(false);
-					Blackjack.bettingAmount = 10000;
 					End thing = new End();
+					Blackjack.bettingAmount = 10000;
 				}
 				better.setVisible(true);	
 				better.setText("You busted, How much would you like to bet?");	
@@ -723,8 +721,8 @@ public class BlackJackMain implements MouseListener{
 				{
 				}
 				frame.setVisible(false);
-				Blackjack.bettingAmount = 10000;
 				End thing = new End();
+				Blackjack.bettingAmount = 10000;
 			}
 		}
 		else if (e.getSource() == stand)
@@ -803,8 +801,8 @@ public class BlackJackMain implements MouseListener{
 				{
 				}
 				frame.setVisible(false);
-				Blackjack.bettingAmount = 10000;
 				End thing = new End();
+				Blackjack.bettingAmount = 10000;
 			}
 		}
 		else if (e.getSource() == play)
@@ -982,8 +980,8 @@ public class BlackJackMain implements MouseListener{
 		else if (e.getSource() == cashout)
 		{
 			frame.setVisible(false);
-			Blackjack.bettingAmount = 10000;
 			End finish = new End(Blackjack.bettingAmount);
+			Blackjack.bettingAmount = 10000;
 		}
     }
     
