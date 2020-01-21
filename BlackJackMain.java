@@ -700,6 +700,13 @@ public class BlackJackMain implements MouseListener{
 			}
 			if (Blackjack.bettingAmount <= 0)
 			{
+				try
+				{
+					TimeUnit.SECONDS.sleep(1);
+				}
+				catch(InterruptedException f)
+				{
+				}
 				frame.setVisible(false);
 				Blackjack.bettingAmount = 10000;
 				End thing = new End();
@@ -773,6 +780,13 @@ public class BlackJackMain implements MouseListener{
 			}
 			if (Blackjack.bettingAmount <= 0)
 			{
+				try
+				{
+					TimeUnit.SECONDS.sleep(1);
+				}
+				catch(InterruptedException f)
+				{
+				}
 				frame.setVisible(false);
 				Blackjack.bettingAmount = 10000;
 				End thing = new End();
