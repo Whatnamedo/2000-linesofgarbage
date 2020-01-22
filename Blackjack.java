@@ -12,12 +12,13 @@ public class Blackjack {
 		System.out.println("Thank you for playing Black Jack!" + "\n" + "You have $" + bettingAmount + " to play!");
 		System.out.print("How much would you like to bet? ");
 		
-		while (true) // while loop which asks the player for a betting amount, invalid inputs result in the user
+		while (bet < 1 || bet > bettingAmount) // while loop which asks the player for a betting amount, invalid inputs result in the user
 		{                                       // being prompted to enter a valid input
 			try
 			{
 				str = br.readLine(); // reads the user's input
 				bet = Integer.parseInt(str); // converts the string bet into an integer bet
+				bettingAmount -= bet;
 			}
 			catch (NumberFormatException e)
 			{
@@ -27,11 +28,7 @@ public class Blackjack {
 			{
 				
 			}
-			if (bet > 0 && bet < bettingAmount + 1) 
-			{
-				bettingAmount -= bet;
-				break; // will stop the loop when the bet is above zero and <= to the money the player has
-			}
+			if (bet > 0 && bet < bettingAmount + 1) break; // will stop the loop when the bet is above zero and <= to the money the player has
 			System.out.print("Invalid Input! How much would you like to bet? "); // keeps getting the bet until it is a valid bet
 		}
 		System.out.print("\n"); // prints a new line
@@ -217,33 +214,5 @@ public class Blackjack {
 				}
 			}
 		}
-	}
-	
-	public static void main(String[] args) throws InterruptedException // main code
-	{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // used to read input
-			
-		while (bettingAmount > 0) // while the player has money
-		{
-			bet = -1; 
-			Deck deck = new Deck(); // creates a deck
-			Hand playerHand = new Hand(false); // creates a hand for the player
-			Hand dealerHand = new Hand(true); // creates a hand for the dealer
-			getBet(br);
-			
-			deck.shuffle(); // shuffles the deck
-			playerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the player's hand
-			playerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the player's hand
-			
-			System.out.println(playerHand); // displays the player's hand
-			
-			dealerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the dealer's hand
-			dealerHand.addCard(deck.draw()); // draws a card from the top of the deck and adds it to the dealer's hand
-			
-			System.out.println(dealerHand); // displays the player's hand
-			hsloop(br, deck, playerHand, dealerHand); // player's turn (hit, stand) --> dealer's turn
-
-		}
-		System.out.println("You have ran out of money, you lose!"); // if bettingAmount is <= 0 then the player loses and its game over
 	}
 }
