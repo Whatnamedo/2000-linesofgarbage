@@ -1,5 +1,3 @@
-package BlackJack_Game;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +23,7 @@ public class BlackJackMain implements MouseListener{
 	private JButton backstart = new JButton("Back to Main Page");
 	private JButton bettons = new JButton("Bet");	
 	private JButton cashout = new JButton("Cash Out");
+	private JButton cont = new JButton("Continue");
 	private JFrame startframe = new JFrame("BlackJack");
 	private JFrame frame = new JFrame("BlackJack");
 	private JFrame betframe = new JFrame("BlackJack");
@@ -86,6 +85,7 @@ public class BlackJackMain implements MouseListener{
 		betton.addMouseListener(this);
 		backstart.addMouseListener(this);
 		cashout.addMouseListener(this);
+		cont.addMouseListener(this);
 		start.setPreferredSize(new Dimension(300,300));
 		start.setLayout (new GridLayout(3,0));
 		game.setPreferredSize(new Dimension(1000,600));
@@ -251,6 +251,8 @@ public class BlackJackMain implements MouseListener{
 		bettons.setVisible(false);
 		cashout.setBounds(800, 150, 100, 50);
 		cashout.setVisible(true);
+		cont.setBounds(75, 225, 100, 50);
+		cont.setVisible(false);
 		bet.add(in);
 		bet.add(betton);
 		bet.add(bethere);
@@ -271,6 +273,7 @@ public class BlackJackMain implements MouseListener{
 		game.add(newbet);	
 		game.add(bettons);
 		game.add(cashout);
+		game.add(cont);
 		startframe.add(start);
 		startframe.pack();
 		startframe.setVisible(true);
@@ -597,24 +600,19 @@ public class BlackJackMain implements MouseListener{
 				balance.setText("Balance: $" + Blackjack.bettingAmount);	
 				hit.setVisible(false);	
 				stand.setVisible(false);
-				if (Blackjack.bettingAmount <= 0)
-				{
-					try
-					{
-						TimeUnit.SECONDS.sleep(1);
-					}
-					catch(InterruptedException f)
-					{
-					}
-					frame.setVisible(false);
-					End thing = new End();
-					Blackjack.bettingAmount = 10000;
-				}
 				better.setVisible(true);	
 				better.setText("You busted, How much would you like to bet?");	
 				better.setBounds(15, 180, 250, 50);	
 				newbet.setVisible(true);	
 				bettons.setVisible(true);
+				if (Blackjack.bettingAmount <= 0)
+				{
+					better.setText("You are out of money!");
+					better.setBounds(70, 190, 200, 30);
+					bettons.setVisible(false);
+					newbet.setVisible(false);
+					cont.setVisible(true);
+				}
 			}
 		}
 		else if (e.getSource() == Double)
@@ -719,16 +717,11 @@ public class BlackJackMain implements MouseListener{
 			}
 			if (Blackjack.bettingAmount <= 0)
 			{
-				try
-				{
-					TimeUnit.SECONDS.sleep(1);
-				}
-				catch(InterruptedException f)
-				{
-				}
-				frame.setVisible(false);
-				End thing = new End();
-				Blackjack.bettingAmount = 10000;
+				better.setText("You are out of money!");
+				better.setBounds(70, 190, 200, 30);
+				bettons.setVisible(false);
+				newbet.setVisible(false);
+				cont.setVisible(true);
 			}
 		}
 		else if (e.getSource() == stand)
@@ -799,16 +792,11 @@ public class BlackJackMain implements MouseListener{
 			}
 			if (Blackjack.bettingAmount <= 0)
 			{
-				try
-				{
-					TimeUnit.SECONDS.sleep(1);
-				}
-				catch(InterruptedException f)
-				{
-				}
-				frame.setVisible(false);
-				End thing = new End();
-				Blackjack.bettingAmount = 10000;
+				better.setText("You are out of money!");
+				better.setBounds(70, 190, 200, 30);
+				bettons.setVisible(false);
+				newbet.setVisible(false);
+				cont.setVisible(true);
 			}
 		}
 		else if (e.getSource() == play)
@@ -987,6 +975,12 @@ public class BlackJackMain implements MouseListener{
 		{
 			frame.setVisible(false);
 			End finish = new End(Blackjack.bettingAmount);
+			Blackjack.bettingAmount = 10000;
+		}
+		else if (e.getSource() == cont)
+		{
+			frame.setVisible(false);
+			End thing = new End();
 			Blackjack.bettingAmount = 10000;
 		}
     }
