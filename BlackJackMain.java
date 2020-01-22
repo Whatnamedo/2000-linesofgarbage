@@ -1,3 +1,5 @@
+package BlackJack_Game;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -273,6 +275,10 @@ public class BlackJackMain implements MouseListener{
 		startframe.pack();
 		startframe.setVisible(true);
 		startframe.setLocation(550,250);
+		startframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		betframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		infoframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	private void dealerturn (int i) throws InterruptedException
 	{
@@ -670,7 +676,7 @@ public class BlackJackMain implements MouseListener{
 						newbet.setVisible(true);	
 						bettons.setVisible(true);
 					}
-					else //if (i > 16)
+					else
 					{
 						if (dealerHand.getTotalValue() < playerHand.getTotalValue())
 						{
@@ -694,7 +700,7 @@ public class BlackJackMain implements MouseListener{
 							bettons.setVisible(true);
 							newbet.setVisible(true);
 						}
-						else //if (dealerHand.getTotalValue() > playerHand.getTotalValue())
+						else
 						{
 							bamount.setText("Bet: $0");
 							balance.setText("Balance: $" + Blackjack.bettingAmount);	
@@ -750,7 +756,7 @@ public class BlackJackMain implements MouseListener{
 					newbet.setVisible(true);	
 					bettons.setVisible(true);
 				}
-				else //if (i > 16)
+				else
 				{
 					bamount.setText("Bet: $0");
 					if (dealerHand.getTotalValue() < playerHand.getTotalValue())
@@ -775,7 +781,7 @@ public class BlackJackMain implements MouseListener{
 						bettons.setVisible(true);
 						newbet.setVisible(true);
 					}
-					else //if (dealerHand.getTotalValue() > playerHand.getTotalValue())
+					else
 					{
 						bamount.setText("Bet: $0");
 						balance.setText("Balance: $" + Blackjack.bettingAmount);	
