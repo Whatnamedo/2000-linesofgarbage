@@ -296,6 +296,13 @@ public class BlackJackMain implements MouseListener{
 		}
 		else
 		{
+//			long curr = System.currentTimeMillis();
+//			long time = System.currentTimeMillis();
+//			while (time != curr+1000L)
+//			{	
+//				time = System.currentTimeMillis();
+//			}
+//			TimeUnit.SECONDS.sleep(1);
 			Card ind = d.draw();
 			dealerHand.addCard(ind);
 			int index = dealerHand.getSize();
@@ -307,7 +314,7 @@ public class BlackJackMain implements MouseListener{
 				deal2.setBounds(500,31,69,94);
 				deal3.setBounds(580,31,69,94);
 				deal3.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 4)
@@ -319,7 +326,7 @@ public class BlackJackMain implements MouseListener{
 				deal3.setBounds(540,31,69,94);
 				deal4.setBounds(620,31,69,94);
 				deal4.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 5)
@@ -332,7 +339,7 @@ public class BlackJackMain implements MouseListener{
 				deal4.setBounds(580,31,69,94);
 				deal5.setBounds(660,31,69,94);
 				deal5.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 6)
@@ -346,7 +353,7 @@ public class BlackJackMain implements MouseListener{
 				deal5.setBounds(620,31,69,94);
 				deal6.setBounds(700,31,69,94);
 				deal6.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 7)
@@ -361,7 +368,7 @@ public class BlackJackMain implements MouseListener{
 				deal6.setBounds(660,31,69,94);
 				deal7.setBounds(740,31,69,94);
 				deal7.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 8)
@@ -377,7 +384,7 @@ public class BlackJackMain implements MouseListener{
 				deal7.setBounds(700,31,69,94);
 				deal8.setBounds(780,31,69,94);
 				deal8.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 			else if (index == 9)
@@ -394,7 +401,7 @@ public class BlackJackMain implements MouseListener{
 				deal8.setBounds(740,31,69,94);
 				deal9.setBounds(820,31,69,94);
 				deal9.setVisible(true);
-				TimeUnit.SECONDS.sleep(1);
+//				TimeUnit.SECONDS.sleep(1);
 				dealerturn(dealerHand.getTotalValue());
 			}
 		}
